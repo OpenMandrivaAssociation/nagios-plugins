@@ -8,7 +8,7 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.6
+Version:	1.4.8
 Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
@@ -20,6 +20,10 @@ Patch2:		nagios-plugins-check_compaq_insight.diff
 Patch3:		nagios-plugins-wireshark.diff
 Patch4:		nagios-plugins-radiusclient-ng.diff
 Patch5:		nagios-plugins-check_ide_smart.diff
+Patch6:		nagios-plugins-contrib-API.patch
+Patch7:		check_ipxping.diff
+Patch8:		command.cfg.diff
+Patch9:		nagios-plugins-check_ping-socket-filter-warning.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 # we seem to need zillions of requires and buildrequires, 
@@ -42,6 +46,7 @@ Requires:	traceroute
 Requires:	mrtg
 Requires:	qstat
 Requires:	tshark
+Requires:	ipxping
 BuildRequires:	cvs
 BuildRequires:	MySQL-devel
 BuildRequires:	autoconf2.5
@@ -71,6 +76,7 @@ BuildRequires:	textutils
 BuildRequires:	traceroute
 BuildRequires:	zlib-devel
 BuildRequires:	file
+BuildRequires:	nagios
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 
@@ -95,6 +101,10 @@ RPM-based system.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p0
+%patch6 -p1
+%patch7 -p0
+%patch8 -p0
+%patch9 -p0
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
@@ -113,7 +123,7 @@ popd
 
 %build
 export WANT_AUTOCONF_2_5="1"
-autopoint --force; aclocal-1.9 -I gl/m4; autoheader; automake-1.9 --add-missing --force-missing --copy; autoconf
+autopoint --force; aclocal-1.9 -I gl/m4 -I m4; autoheader; automake-1.9 --add-missing --force-missing --copy; autoconf
 
 export PATH_TO_DIG=/usr/bin/dig
 export PATH_TO_FPING=/bin/fping
@@ -210,23 +220,37 @@ make \
 make -C plugins \
     CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl" \
     CFLAGS="%{optflags}" \
-    LDFLAGS="-L. -L%{_libdir}" check_ide_smart
+    LDFLAGS="-L. -L%{_libdir}" check_ide_smart check_ldap check_pgsql check_radius
 
-gcc %{optflags} -Llib -I. -Iplugins -Ilib -o contrib/check_cluster contrib/check_cluster2.c
-#gcc %{optflags} -Llib -I. -Iplugins -Ilib -o contrib/check_rbl contrib/check_rbl.c plugins/popen.o plugins/utils.o plugins/netutils.o
-#gcc %{optflags} -Llib -I. -Iplugins -Ilib -o contrib/check_ipxping contrib/check_ipxping.c 
-gcc %{optflags} -Llib -I. -Iplugins -Ilib -o contrib/check_timeout contrib/check_timeout.c
-#gcc %{optflags} -Llib -I. -Iplugins -Ilib -o contrib/check_uptime contrib/check_uptime.c plugins/popen.o plugins/utils.o plugins/netutils.o
+gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_cluster contrib/check_cluster2.c
+
+gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_rbl contrib/check_rbl.c \
+    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
+
+gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_ipxping contrib/check_ipxping.c \
+    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
+
+gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_timeout contrib/check_timeout.c
+
+gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_uptime contrib/check_uptime.c \
+    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
 
 %install
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
-install -d -m0755 %{buildroot}%{_sysconfdir}/nagios
+install -d -m0755 %{buildroot}%{_sysconfdir}/nagios/plugins.d
 install -d -m0755 %{buildroot}%{_libdir}/nagios/plugins/contrib
 
 make AM_INSTALL_PROGRAM_FLAGS="" DESTDIR=%{buildroot} install
 
 install -m0755 contrib/check* %{buildroot}%{_libdir}/nagios/plugins/contrib/
+#install -m0755 plugins-scripts/check_oracle %{buildroot}%{_libdir}/nagios/plugins/contrib/
+
+install -m0755 plugins/check_ldap %{buildroot}%{_libdir}/nagios/plugins/
+ln -s check_ldap %{buildroot}%{_libdir}/nagios/plugins/check_ldaps
+
+install -m0755 plugins/check_pgsql %{buildroot}%{_libdir}/nagios/plugins/
+install -m0755 plugins/check_radius %{buildroot}%{_libdir}/nagios/plugins/
 
 # install the extra plugins
 pushd extra-plugins
@@ -236,10 +260,10 @@ popd
 cp contrib/README.TXT .
 
 install -m0755 contrib/check_cluster %{buildroot}%{_libdir}/nagios/plugins/contrib/
-#install -m0755 contrib/check_rbl %{buildroot}%{_libdir}/nagios/plugins/contrib/
-#install -m0755 contrib/check_ipxping %{buildroot}%{_libdir}/nagios/plugins/contrib/
+install -m0755 contrib/check_rbl %{buildroot}%{_libdir}/nagios/plugins/contrib/
+install -m0755 contrib/check_ipxping %{buildroot}%{_libdir}/nagios/plugins/contrib/
 install -m0755 contrib/check_timeout %{buildroot}%{_libdir}/nagios/plugins/contrib/
-#install -m0755 contrib/check_uptime %{buildroot}%{_libdir}/nagios/plugins/contrib/
+install -m0755 contrib/check_uptime %{buildroot}%{_libdir}/nagios/plugins/contrib/
 install -m0755 plugins/check_ide_smart %{buildroot}%{_libdir}/nagios/plugins/
 install -m0755 plugins-root/check_dhcp %{buildroot}%{_libdir}/nagios/plugins/
 install -m0755 plugins-root/check_icmp %{buildroot}%{_libdir}/nagios/plugins/
@@ -252,7 +276,8 @@ install -m0755 contrib/packet_utils.pm %{buildroot}%{_libdir}/nagios/plugins/con
 install -m0755 plugins-scripts/utils.sh %{buildroot}%{_libdir}/nagios/plugins/contrib/utils.sh
 
 # install the config file
-install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/
+install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.cfg
+convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg
 
 # don't ship dev files
 rm %{buildroot}%{_libdir}/nagios/plugins/contrib/*.c
@@ -298,8 +323,9 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS CODING ChangeLog FAQ LEGAL NEWS README* REQUIREMENTS SUPPORT
-%attr(644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/command.cfg
-%defattr(755,root,root)
+%attr(644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/command-old-style.cfg
+%attr(644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/%{name}.cfg
+%defattr(0755,root,root)
 %dir %{_libdir}/nagios/plugins
 %dir %{_libdir}/nagios/plugins/contrib
 # list them all so it's easier to see what's new/missing while building
@@ -413,7 +439,6 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/contrib/check_snmp_process_monitor.pl
 %{_libdir}/nagios/plugins/contrib/check_snmp_procs.pl
 %{_libdir}/nagios/plugins/contrib/check_sockets.pl
-%{_libdir}/nagios/plugins/contrib/check_sybase
 %{_libdir}/nagios/plugins/contrib/check_vcs.pl
 %{_libdir}/nagios/plugins/contrib/check_wave.pl
 %{_libdir}/nagios/plugins/contrib/check_wins.pl
@@ -435,12 +460,14 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/contrib/check_traceroute-pure_perl.pl
 %{_libdir}/nagios/plugins/contrib/check_traceroute.pl
 %{_libdir}/nagios/plugins/contrib/check_cluster
-#%{_libdir}/nagios/plugins/contrib/check_rbl
-#%{_libdir}/nagios/plugins/contrib/check_ipxping
+%{_libdir}/nagios/plugins/contrib/check_rbl
+%{_libdir}/nagios/plugins/contrib/check_ipxping
 %{_libdir}/nagios/plugins/contrib/check_timeout
-#%{_libdir}/nagios/plugins/contrib/check_uptime
+%{_libdir}/nagios/plugins/contrib/check_uptime
 %{_libdir}/nagios/plugins/contrib/packet_utils.pm
+#%{_libdir}/nagios/plugins/contrib/check_ora_table_space.pl
+#%{_libdir}/nagios/plugins/contrib/check_oracle_instance.pl
+#%{_libdir}/nagios/plugins/contrib/check_oracle
+#%{_libdir}/nagios/plugins/contrib/check_oracle_tbs
 %attr(4550,root,root) %{_libdir}/nagios/plugins/check_dhcp
 %attr(4550,root,root) %{_libdir}/nagios/plugins/check_icmp
-
-
