@@ -277,7 +277,7 @@ install -m0755 plugins-scripts/utils.sh %{buildroot}%{_libdir}/nagios/plugins/co
 
 # install the config file
 install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.cfg
-convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg
+%{_sbindir}/convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg
 
 # don't ship dev files
 rm %{buildroot}%{_libdir}/nagios/plugins/contrib/*.c
