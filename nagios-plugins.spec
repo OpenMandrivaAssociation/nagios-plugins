@@ -8,7 +8,7 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.8
+Version:	1.4.9
 Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
@@ -246,9 +246,6 @@ make AM_INSTALL_PROGRAM_FLAGS="" DESTDIR=%{buildroot} install
 install -m0755 contrib/check* %{buildroot}%{_libdir}/nagios/plugins/contrib/
 #install -m0755 plugins-scripts/check_oracle %{buildroot}%{_libdir}/nagios/plugins/contrib/
 
-install -m0755 plugins/check_ldap %{buildroot}%{_libdir}/nagios/plugins/
-ln -s check_ldap %{buildroot}%{_libdir}/nagios/plugins/check_ldaps
-
 install -m0755 plugins/check_pgsql %{buildroot}%{_libdir}/nagios/plugins/
 install -m0755 plugins/check_radius %{buildroot}%{_libdir}/nagios/plugins/
 
@@ -288,6 +285,7 @@ rm -f %{buildroot}%{_libdir}/nagios/plugins/contrib/check_ora_table_space.pl
 rm -f %{buildroot}%{_libdir}/nagios/plugins/contrib/check_oracle_instance.pl
 rm -f %{buildroot}%{_libdir}/nagios/plugins/contrib/check_oracle.sh
 rm -f %{buildroot}%{_libdir}/nagios/plugins/contrib/check_oracle_tbs
+rm -f %{buildroot}%{_libdir}/nagios/plugins/contrib/check_cluster2.README
 
 # this one is outdated
 rm -f %{buildroot}%{_libdir}/nagios/plugins/contrib/check_rrd_data.pl
@@ -332,6 +330,7 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/check_apt
 %{_libdir}/nagios/plugins/check_breeze
 %{_libdir}/nagios/plugins/check_by_ssh
+%{_libdir}/nagios/plugins/check_cluster
 %{_libdir}/nagios/plugins/check_dig
 %{_libdir}/nagios/plugins/check_disk
 %{_libdir}/nagios/plugins/check_disk_smb
@@ -459,7 +458,6 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/contrib/check_temp_fsc
 %{_libdir}/nagios/plugins/contrib/check_traceroute-pure_perl.pl
 %{_libdir}/nagios/plugins/contrib/check_traceroute.pl
-%{_libdir}/nagios/plugins/contrib/check_cluster
 %{_libdir}/nagios/plugins/contrib/check_rbl
 %{_libdir}/nagios/plugins/contrib/check_ipxping
 %{_libdir}/nagios/plugins/contrib/check_timeout
