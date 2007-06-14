@@ -50,7 +50,7 @@ Requires:	ipxping
 BuildRequires:	cvs
 BuildRequires:	MySQL-devel
 BuildRequires:	autoconf2.5
-BuildRequires:	automake1.9
+BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	bind-utils
 BuildRequires:	fileutils
@@ -123,7 +123,7 @@ popd
 
 %build
 export WANT_AUTOCONF_2_5="1"
-autopoint --force; aclocal-1.9 -I gl/m4 -I m4; autoheader; automake-1.9 --add-missing --force-missing --copy; autoconf
+autopoint --force; aclocal -I gl/m4 -I m4; autoheader; automake --add-missing --force-missing --copy; autoconf
 
 export PATH_TO_DIG=/usr/bin/dig
 export PATH_TO_FPING=/bin/fping
@@ -148,6 +148,16 @@ export PATH_TO_SWAPINFO=
 export PATH_TO_UPTIME=/usr/bin/uptime
 export PATH_TO_WHO=/usr/bin/who
 export PATH_TO_APTGET=/usr/bin/apt-get
+
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
+export FFLAGS="%{optflags}"
+
+%if %mdkversion >= 200710
+export CFLAGS="$CFLAGS -fstack-protector"
+export CXXFLAGS="$CXXFLAGS -fstack-protector"
+export FFLAGS="$FFLAGS -fstack-protector"
+%endif
 
 %configure2_5x \
     --libexecdir=%{_libdir}/nagios/plugins \
@@ -214,25 +224,25 @@ EOF
 
 make \
     CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl" \
-    CFLAGS="%{optflags}" \
+    CFLAGS="$CFLAGS" \
     LDFLAGS="-L. -L%{_libdir}"
 
 make -C plugins \
     CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl" \
-    CFLAGS="%{optflags}" \
+    CFLAGS="$CFLAGS" \
     LDFLAGS="-L. -L%{_libdir}" check_ide_smart check_ldap check_pgsql check_radius
 
-gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_cluster contrib/check_cluster2.c
+gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_cluster contrib/check_cluster2.c
 
-gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_rbl contrib/check_rbl.c \
+gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_rbl contrib/check_rbl.c \
     plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
 
-gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_ipxping contrib/check_ipxping.c \
+gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_ipxping contrib/check_ipxping.c \
     plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
 
-gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_timeout contrib/check_timeout.c
+gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_timeout contrib/check_timeout.c
 
-gcc %{optflags} -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_uptime contrib/check_uptime.c \
+gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_uptime contrib/check_uptime.c \
     plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
 
 %install
