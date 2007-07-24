@@ -9,7 +9,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.9
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -149,15 +149,7 @@ export PATH_TO_UPTIME=/usr/bin/uptime
 export PATH_TO_WHO=/usr/bin/who
 export PATH_TO_APTGET=/usr/bin/apt-get
 
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-export FFLAGS="%{optflags}"
-
-%if %mdkversion >= 200710
-export CFLAGS="$CFLAGS -fstack-protector"
-export CXXFLAGS="$CXXFLAGS -fstack-protector"
-export FFLAGS="$FFLAGS -fstack-protector"
-%endif
+%serverbuild
 
 %configure2_5x \
     --libexecdir=%{_libdir}/nagios/plugins \
