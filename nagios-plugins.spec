@@ -30,7 +30,7 @@ Requires(preun): rpm-helper
 # well fine as long as it does the trick...
 Requires:	apt
 Requires:	bind-utils
-Requires:	fileutils
+Requires:	coreutils
 Requires:	fping
 Requires:	gawk
 Requires:	grep
@@ -41,7 +41,6 @@ Requires:	perl
 Requires:	python
 Requires:	samba-client
 Requires:	shadow-utils
-Requires:	textutils
 Requires:	traceroute
 Requires:	mrtg
 Requires:	qstat
@@ -53,7 +52,7 @@ BuildRequires:	autoconf2.5
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	bind-utils
-BuildRequires:	fileutils
+BuildRequires:	coreutils
 BuildRequires:	fping
 BuildRequires:	gawk
 BuildRequires:	gettext-devel
@@ -72,7 +71,6 @@ BuildRequires:	python
 BuildRequires:	radiusclient-ng-devel
 BuildRequires:	samba-client
 BuildRequires:	shadow-utils
-BuildRequires:	textutils
 BuildRequires:	traceroute
 BuildRequires:	zlib-devel
 BuildRequires:	file
