@@ -5,11 +5,13 @@
 
 %define nsusr nagios
 %define nsgrp nagios
+%define cmdusr apache
+%define cmdgrp apache
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.9
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -310,7 +312,8 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %find_lang %{name}
 
 %pre
-%_pre_useradd %{nsusr} /var/log/nagios /bin/sh
+%{_sbindir}/useradd -r -M -s /bin/sh -d /var/log/nagios -c "system user for %{nsusr}" %{nsusr} >/dev/null 2>&1 || :
+%{_bindir}/gpasswd -a %{nsusr} %{cmdgrp} >/dev/null 2>&1 || :
 
 %postun
 %_postun_userdel %{nsusr}
