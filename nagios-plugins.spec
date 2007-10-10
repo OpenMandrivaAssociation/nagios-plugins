@@ -10,8 +10,8 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.9
-Release:	%mkrel 5
+Version:	1.4.10
+Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -20,8 +20,6 @@ Patch0:		nagios-plugins-no_buggy_locales.diff
 Patch1:		nagios-plugins-check_nmap_random_fix.diff
 Patch2:		nagios-plugins-check_compaq_insight.diff
 Patch3:		nagios-plugins-wireshark.diff
-Patch4:		nagios-plugins-radiusclient-ng.diff
-Patch5:		nagios-plugins-check_ide_smart.diff
 Patch6:		nagios-plugins-contrib-API.patch
 Patch7:		check_ipxping.diff
 Patch8:		command.cfg.diff
@@ -99,8 +97,6 @@ RPM-based system.
 %patch1 -p0
 %patch2 -p0
 %patch3 -p1
-%patch4 -p1
-%patch5 -p0
 %patch6 -p1
 %patch7 -p0
 %patch8 -p0
@@ -160,7 +156,8 @@ export PATH_TO_APTGET=/usr/bin/apt-get
     --with-pgsql=%{_prefix} \
     --with-mysql=%{_prefix} \
     --with-ping-command="/bin/ping -n -U -w %d -c %d %s" \
-    --with-ping6-command="%{_bindir}/ping6 -n -U -w %d -c %d %s"
+    --with-ping6-command="%{_bindir}/ping6 -n -U -w %d -c %d %s" \
+    --with-ipv6
 
 find . -type f -name "Makefile" -exec /usr/bin/perl -pi -e "s|-L/usr/lib|-L%{_libdir}|g" \{\} \;
 
