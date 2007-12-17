@@ -76,7 +76,6 @@ BuildRequires:	zlib-devel
 BuildRequires:	file
 BuildRequires:	nagios
 Epoch:		1
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Nagios is a program that will monitor hosts and services on your
