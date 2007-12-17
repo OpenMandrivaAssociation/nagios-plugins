@@ -10,7 +10,7 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.10
+Version:	1.4.11
 Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
@@ -330,6 +330,7 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/check_apt
 %{_libdir}/nagios/plugins/check_breeze
 %{_libdir}/nagios/plugins/check_by_ssh
+%{_libdir}/nagios/plugins/check_clamd
 %{_libdir}/nagios/plugins/check_cluster
 %{_libdir}/nagios/plugins/check_dig
 %{_libdir}/nagios/plugins/check_disk
@@ -340,6 +341,7 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/check_flexlm
 %{_libdir}/nagios/plugins/check_fping
 %{_libdir}/nagios/plugins/check_ftp
+%{_libdir}/nagios/plugins/check_game
 %{_libdir}/nagios/plugins/check_hpjd
 %{_libdir}/nagios/plugins/check_http
 %{_libdir}/nagios/plugins/check_ide_smart
@@ -356,11 +358,14 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/check_mrtg
 %{_libdir}/nagios/plugins/check_mrtgtraf
 %{_libdir}/nagios/plugins/check_mysql
+%{_libdir}/nagios/plugins/check_mysql_query
 %{_libdir}/nagios/plugins/check_nagios
 %{_libdir}/nagios/plugins/check_nntp
 %{_libdir}/nagios/plugins/check_nntps
 %{_libdir}/nagios/plugins/check_nt
 %{_libdir}/nagios/plugins/check_ntp
+%{_libdir}/nagios/plugins/check_ntp_peer
+%{_libdir}/nagios/plugins/check_ntp_time
 %{_libdir}/nagios/plugins/check_nwstat
 %{_libdir}/nagios/plugins/check_oracle
 %{_libdir}/nagios/plugins/check_overcr
@@ -385,9 +390,6 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/check_ups
 %{_libdir}/nagios/plugins/check_users
 %{_libdir}/nagios/plugins/check_wave
-%{_libdir}/nagios/plugins/check_clamd
-%{_libdir}/nagios/plugins/check_game
-%{_libdir}/nagios/plugins/check_mysql_query
 %{_libdir}/nagios/plugins/negate
 %{_libdir}/nagios/plugins/urlize
 %{_libdir}/nagios/plugins/utils.pm
