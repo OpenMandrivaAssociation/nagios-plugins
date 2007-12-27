@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.11
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -42,7 +42,6 @@ Requires:	python
 Requires:	samba-client
 Requires:	shadow-utils
 Requires:	traceroute
-Requires:	mrtg
 Requires:	qstat
 Requires:	tshark
 Requires:	ipxping
@@ -89,6 +88,14 @@ programs which return the status of the checks to Nagios.
 This package contains the basic plugins necessary for use with the
 Nagios package.  This package should install cleanly on almost any
 RPM-based system.
+
+%package mrtg
+Summary:    mrtg plugins for nagios
+Group:		Networking/Other
+Requires:	mrtg
+
+%description mrtg
+This package contains mrtg plugins for nagios.
 
 %prep
 
@@ -355,8 +362,6 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 %{_libdir}/nagios/plugins/check_load
 %{_libdir}/nagios/plugins/check_log
 %{_libdir}/nagios/plugins/check_mailq
-%{_libdir}/nagios/plugins/check_mrtg
-%{_libdir}/nagios/plugins/check_mrtgtraf
 %{_libdir}/nagios/plugins/check_mysql
 %{_libdir}/nagios/plugins/check_mysql_query
 %{_libdir}/nagios/plugins/check_nagios
@@ -471,3 +476,8 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 #%{_libdir}/nagios/plugins/contrib/check_oracle_tbs
 %attr(4550,root,root) %{_libdir}/nagios/plugins/check_dhcp
 %attr(4550,root,root) %{_libdir}/nagios/plugins/check_icmp
+
+%files mrtg
+%defattr(-,root,root)
+%{_libdir}/nagios/plugins/check_mrtg
+%{_libdir}/nagios/plugins/check_mrtgtraf
