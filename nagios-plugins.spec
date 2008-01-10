@@ -11,11 +11,12 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.11
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
+Source1:	http://www.consol.com/fileadmin/opensource/Nagios/check_mysql_perf-1.2.tar.gz
 Source100:	check_apt.cfg
 Source101:	check_breeze.cfg
 Source102:	check_by_ssh.cfg
@@ -125,6 +126,8 @@ Source251:	check_traceroute.cfg
 Source252:	check_uptime.cfg
 Source253:	check_wins.cfg
 #
+Source300:	check_mysql_perf.cfg
+#
 Patch0:		nagios-plugins-no_buggy_locales.diff
 Patch1:		nagios-plugins-check_compaq_insight.diff
 Patch2:		nagios-plugins-wireshark.diff
@@ -144,6 +147,9 @@ Patch15:	nagios-plugins-check_appletalk.pl_fix.diff
 Patch16:	nagios-plugins-check_mssql.sh_fix.diff
 Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
+#
+Patch300:	nagios-plugins-check_mysql_perf.diff
+Patch301:	check_mysql_perf-no_buggy_locales.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 # we seem to need zillions of requires and buildrequires, 
@@ -977,7 +983,7 @@ uptime, and uname)
 %package -n	nagios-check_ms_spooler
 Summary:	The check_ms_spooler plugin for nagios
 Group:		Networking/Other
-Requires:	samba-clients
+Requires:	samba-client
 Conflicts:	nagios-plugins < 1:1.4.11-3
 
 %description -n	nagios-check_ms_spooler
@@ -1081,7 +1087,7 @@ disk status.
 %package -n	nagios-check_smb
 Summary:	The check_smb plugin for nagios
 Group:		Networking/Other
-Requires:	samba-clients
+Requires:	samba-client
 Conflicts:	nagios-plugins < 1:1.4.11-3
 
 %description -n	nagios-check_smb
@@ -1170,9 +1176,18 @@ Conflicts:	nagios-plugins < 1:1.4.11-3
 %description -n	nagios-check_wins
 Perl Check WINS plugin for Nagios.
 
+%package -n	nagios-check_mysql_perf
+Summary:	The check_mysql_perf plugin for nagios
+Group:		Networking/Other
+URL:		http://www.consol.com/opensource/nagios/check-mysql-perf
+
+%description -n	nagios-check_mysql_perf
+A plugin for Nagios that allows you to monitor various performance-related
+characteristics of a MySQL database.
+
 %prep
 
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
@@ -1193,6 +1208,12 @@ Perl Check WINS plugin for Nagios.
 %patch17 -p0
 %patch18 -p0
 
+%patch300 -p0
+pushd check_mysql_perf*
+%patch301 -p0
+cp -p plugins/check_mysql_perf.c plugins/my_utils.h ../plugins/
+popd
+
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
@@ -1212,6 +1233,7 @@ mkdir plugins.d
 # magic by anssi
 pushd plugins.d; %{expand:%(for i in {100..152}; do echo "cp %%SOURCE$i ."; done)}; popd
 pushd plugins.d; %{expand:%(for i in {200..253}; do echo "cp %%SOURCE$i ."; done)}; popd
+pushd plugins.d; %{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done)}; popd
 
 %build
 export WANT_AUTOCONF_2_5="1"
@@ -1530,6 +1552,7 @@ install -m0644 plugins.d/check_timeout.cfg %{buildroot}%{_sysconfdir}/nagios/plu
 install -m0644 plugins.d/check_traceroute.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_traceroute.cfg
 install -m0644 plugins.d/check_uptime.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_uptime.cfg
 install -m0644 plugins.d/check_wins.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_wins.cfg
+install -m0644 plugins.d/check_mysql_perf.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mysql_perf.cfg
 
 # fix bad paths (again!)
 for i in check_breeze check_disk_smb check_file_age check_flexlm check_ifoperstatus \
@@ -2431,6 +2454,13 @@ if [ "" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
+%post -n nagios-check_mysql_perf
+%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
+
+%postun -n nagios-check_mysql_perf
+if [ "" = "0" ]; then
+    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
+fi
 
 %clean
 rm -rf %{buildroot}
@@ -2998,3 +3028,9 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_wins.cfg
 %{_libdir}/nagios/plugins/contrib/check_wins.pl
+
+%files -n nagios-check_mysql_perf
+%defattr(-,root,root)
+%doc check_mysql_perf-*/README
+%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql_perf.cfg
+%{_libdir}/nagios/plugins/check_mysql_perf
