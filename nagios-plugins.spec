@@ -2782,7 +2782,7 @@ rm -rf %{buildroot}
 %files -n nagios-check_arping
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_arping.cfg
-%{_libdir}/nagios/plugins/contrib/check_arping.pl
+%attr(4550,root,root) %{_libdir}/nagios/plugins/contrib/check_arping.pl
 
 %files -n nagios-check_asterisk
 %defattr(-,root,root)
