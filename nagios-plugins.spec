@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.11
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -147,6 +147,7 @@ Patch15:	nagios-plugins-check_appletalk.pl_fix.diff
 Patch16:	nagios-plugins-check_mssql.sh_fix.diff
 Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
+Patch19:	nagios-plugins-utils.pm_fix.diff
 #
 Patch300:	nagios-plugins-check_mysql_perf.diff
 Patch301:	check_mysql_perf-no_buggy_locales.diff
@@ -757,6 +758,7 @@ only if you use the "aaa newmodel athentification")
 %package -n	nagios-check_bgpstate
 Summary:	The check_bgpstate plugin for nagios
 Group:		Networking/Other
+Requires:	whois
 Conflicts:	nagios-plugins < 1:1.4.11-3
 
 %description -n	nagios-check_bgpstate
@@ -790,6 +792,7 @@ on the specified host.
 %package -n	nagios-check_digitemp
 Summary:	The check_digitemp plugin for nagios
 Group:		Networking/Other
+Requires:	digitemp
 Conflicts:	nagios-plugins < 1:1.4.11-3
 
 %description -n	nagios-check_digitemp
@@ -1207,6 +1210,7 @@ characteristics of a MySQL database.
 %patch16 -p0
 %patch17 -p0
 %patch18 -p0
+%patch19 -p1
 
 %patch300 -p0
 pushd check_mysql_perf*
@@ -1569,6 +1573,13 @@ perl -pi -e "s|^use lib qw\(%{_libdir}/nagios/plugins\)|use lib qw\(%{_libdir}/n
 
 # fix bad subst script generated crap...
 find %{buildroot}%{_libdir}/nagios/plugins/contrib/ | xargs perl -pi -e "s|# autoconf-derived\;|\;|g"
+
+# fix other issues
+perl -pi -e "s|\"check_dns\"|\"%{_libdir}/nagios/plugins/contrib/check_dns\"|g" %{buildroot}%{_libdir}/nagios/plugins/contrib/check_dns_random.pl
+cat > %{buildroot}%{_sysconfdir}/nagios/domains.list << EOF
+google.com
+yahoo.com
+EOF
 
 %find_lang %{name}
 
@@ -2471,6 +2482,7 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/command-old-style.cfg
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
 %defattr(0755,root,root)
+%dir %{_libdir}/nagios
 %dir %{_libdir}/nagios/plugins
 %dir %{_libdir}/nagios/plugins/contrib
 %{_libdir}/nagios/plugins/negate
@@ -2836,6 +2848,7 @@ rm -rf %{buildroot}
 
 %files -n nagios-check_dns_random
 %defattr(-,root,root)
+%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/domains.list
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dns_random.cfg
 %{_libdir}/nagios/plugins/contrib/check_dns_random.pl
 
