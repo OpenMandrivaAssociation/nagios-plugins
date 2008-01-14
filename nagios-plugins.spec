@@ -1613,7 +1613,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_apt
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1621,7 +1621,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_breeze
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1629,7 +1629,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_by_ssh
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1637,7 +1637,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_cluster
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1645,7 +1645,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_dhcp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1653,7 +1653,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_dig
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1661,7 +1661,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_disk
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1669,7 +1669,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_disk_smb
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1677,7 +1677,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_dns
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1685,7 +1685,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_dummy
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1693,7 +1693,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_file_age
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1701,7 +1701,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_flexlm
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1709,7 +1709,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_fping
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1717,7 +1717,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_game
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1725,7 +1725,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_hpjd
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1733,7 +1733,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_http
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1741,7 +1741,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_icmp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1749,7 +1749,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ide_smart
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1757,7 +1757,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ifoperstatus
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1765,7 +1765,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ifstatus
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1773,7 +1773,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ircd
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1781,7 +1781,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ldap
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1789,7 +1789,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_load
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1797,7 +1797,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_log
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1805,7 +1805,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mailq
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1813,7 +1813,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mrtg
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1821,7 +1821,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mrtgtraf
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1829,7 +1829,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mysql
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1837,7 +1837,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mysql_query
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1845,7 +1845,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_nagios
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1853,7 +1853,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_nt
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1861,7 +1861,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ntp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1869,7 +1869,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ntp_peer
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1877,7 +1877,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ntp_time
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1885,7 +1885,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_nwstat
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1893,7 +1893,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_oracle
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1901,7 +1901,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_overcr
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1909,7 +1909,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_pgsql
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1917,7 +1917,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ping
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1925,7 +1925,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_procs
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1933,7 +1933,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_radius
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1941,7 +1941,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_real
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1949,7 +1949,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_rpc
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1957,7 +1957,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_sensors
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1965,7 +1965,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_smtp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1973,7 +1973,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_snmp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1981,7 +1981,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ssh
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1989,7 +1989,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_swap
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -1997,7 +1997,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_tcp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2005,7 +2005,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_time
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2013,7 +2013,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ups
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2021,7 +2021,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_users
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2029,7 +2029,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_wave
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2037,7 +2037,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_adptraid
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2045,7 +2045,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_apache
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2053,7 +2053,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_apc_ups
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2061,7 +2061,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_appletalk
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2069,7 +2069,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_arping
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2077,7 +2077,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_asterisk
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2085,7 +2085,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_axis
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2093,7 +2093,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_backup
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2101,7 +2101,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_bgp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2109,7 +2109,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_bgpstate
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2117,7 +2117,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ciscotemp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2125,7 +2125,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_cluster2
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2133,7 +2133,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_compaq_insight
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2141,7 +2141,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_digitemp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2149,7 +2149,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_dlswcircuit
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2157,7 +2157,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_dns_random
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2165,7 +2165,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_email_loop
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2173,7 +2173,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_frontpage
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2181,7 +2181,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_hprsc
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2189,7 +2189,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_hw
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2197,7 +2197,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ica_master_browser
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2205,7 +2205,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ica_metaframe_pub_apps
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2213,7 +2213,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ica_program_neigbourhood
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2221,7 +2221,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_inodes
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2229,7 +2229,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ipxping
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2237,7 +2237,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_javaproc
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2245,7 +2245,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_linux_raid
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2253,7 +2253,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_log2
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2261,7 +2261,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_lotus
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2269,7 +2269,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_maxchannels
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2277,7 +2277,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_maxwanstate
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2285,7 +2285,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mem
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2293,7 +2293,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mrtgext
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2301,7 +2301,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_ms_spooler
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2309,7 +2309,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mssql
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2317,7 +2317,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_netapp
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2325,7 +2325,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_nmap
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2333,7 +2333,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_pcpmetric
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2341,7 +2341,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_pfstate
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2349,7 +2349,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_qmailq
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2357,7 +2357,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_rbl
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2365,7 +2365,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_remote_nagios_status
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2373,7 +2373,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_sendim
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2381,7 +2381,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_smart
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2389,7 +2389,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_smb
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2397,7 +2397,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_snmp_disk_monitor
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2405,7 +2405,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_snmp_printer
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2413,7 +2413,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_snmp_process_monitor
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2421,7 +2421,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_snmp_procs
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2429,7 +2429,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_sockets
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2437,7 +2437,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_timeout
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2445,7 +2445,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_traceroute
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2453,7 +2453,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_uptime
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2461,7 +2461,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_wins
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
@@ -2469,7 +2469,7 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mysql_perf
-if [ "" = "0" ]; then
+if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
