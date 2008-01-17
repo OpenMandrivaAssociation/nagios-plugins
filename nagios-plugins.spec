@@ -11,12 +11,12 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.11
-Release:	%mkrel 6
+Release:	%mkrel 7
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
-Source1:	http://www.consol.com/fileadmin/opensource/Nagios/check_mysql_perf-1.2.tar.gz
+Source1:	http://www.consol.com/fileadmin/opensource/Nagios/check_mysql_perf-1.3.tar.gz
 Source100:	check_apt.cfg
 Source101:	check_breeze.cfg
 Source102:	check_by_ssh.cfg
