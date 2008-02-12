@@ -281,7 +281,8 @@ Conflicts:	nagios-plugins < 1:1.4.11-3
 %description -n	nagios-check_dns
 This plugin uses the nslookup program to obtain the IP address for the given
 host/domain query. An optional DNS server to use may be specified. If no DNS
-server is specified, the default server(s) specified in /etc/resolv.conf will be used.
+server is specified, the default server(s) specified in /etc/resolv.conf will
+be used.
 
 %package -n	nagios-check_dummy
 Summary:	The check_dummy plugin for nagios
