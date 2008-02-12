@@ -805,7 +805,6 @@ Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
 
 %description -n	nagios-check_dlswcircuit
-
 Missing arguments!
 Perl Check Cisco Dlsw Circuit State plugin for Nagios.
 
