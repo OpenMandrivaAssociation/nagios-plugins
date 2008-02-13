@@ -2517,7 +2517,7 @@ rm -rf %{buildroot}
 %files -n nagios-check_dhcp
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dhcp.cfg
-%attr(4550,root,root) %{_libdir}/nagios/plugins/check_dhcp
+%attr(4550,root,nagios) %{_libdir}/nagios/plugins/check_dhcp
 
 %files -n nagios-check_dig
 %defattr(-,root,root)
@@ -2577,7 +2577,7 @@ rm -rf %{buildroot}
 %files -n nagios-check_icmp
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_icmp.cfg
-%attr(4550,root,root) %{_libdir}/nagios/plugins/check_icmp
+%attr(4550,root,nagios) %{_libdir}/nagios/plugins/check_icmp
 
 %files -n nagios-check_ide_smart
 %defattr(-,root,root)
@@ -2794,7 +2794,7 @@ rm -rf %{buildroot}
 %files -n nagios-check_arping
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_arping.cfg
-%attr(4550,root,root) %{_libdir}/nagios/plugins/contrib/check_arping.pl
+%attr(4550,root,nagios) %{_libdir}/nagios/plugins/contrib/check_arping.pl
 
 %files -n nagios-check_asterisk
 %defattr(-,root,root)
