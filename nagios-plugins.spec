@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.11
-Release:	%mkrel 9
+Release:	%mkrel 10
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -1243,7 +1243,7 @@ pushd plugins.d; %{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done
 
 %build
 export WANT_AUTOCONF_2_5="1"
-autopoint --force; aclocal -I gl/m4 -I m4; autoheader; automake --add-missing --force-missing --copy; autoconf
+aclocal -I gl/m4 -I m4; autoheader; automake --add-missing --force-missing --copy; autoconf; autoreconf
 
 export PATH_TO_DIG=/usr/bin/dig
 export PATH_TO_FPING=/bin/fping
