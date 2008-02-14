@@ -148,6 +148,7 @@ Patch16:	nagios-plugins-check_mssql.sh_fix.diff
 Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
 Patch19:	nagios-plugins-utils.pm_fix.diff
+Patch20:	nagios-plugins-1.4.11-fix-pgsql-check.diff
 #
 Patch300:	nagios-plugins-check_mysql_perf.diff
 Patch301:	check_mysql_perf-no_buggy_locales.diff
@@ -1211,6 +1212,7 @@ characteristics of a MySQL database.
 %patch17 -p0
 %patch18 -p0
 %patch19 -p1
+%patch20 -p1
 
 %patch300 -p0
 pushd check_mysql_perf*
