@@ -11,12 +11,13 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.11
-Release:	%mkrel 10
+Release:	%mkrel 11
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
 Source1:	http://www.consol.com/fileadmin/opensource/Nagios/check_mysql_perf-1.3.tar.gz
+Source2:	nagios-plugins.cfg_do_not_use
 Source100:	check_apt.cfg
 Source101:	check_breeze.cfg
 Source102:	check_by_ssh.cfg
@@ -189,7 +190,6 @@ BuildRequires:	shadow-utils
 BuildRequires:	traceroute
 BuildRequires:	zlib-devel
 BuildRequires:	file
-BuildRequires:	nagios
 Epoch:		1
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -1240,6 +1240,7 @@ mkdir plugins.d
 pushd plugins.d; %{expand:%(for i in {100..152}; do echo "cp %%SOURCE$i ."; done)}; popd
 pushd plugins.d; %{expand:%(for i in {200..253}; do echo "cp %%SOURCE$i ."; done)}; popd
 pushd plugins.d; %{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done)}; popd
+cp %{SOURCE2} plugins.d/nagios-plugins.cfg_do_not_use
 
 %build
 export WANT_AUTOCONF_2_5="1"
@@ -1360,6 +1361,7 @@ gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_uptime contrib/check
     plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
 
 perl -pi -e "s|\@libexecdir\@|%{_libdir}/nagios/plugins|g" plugins.d/*.cfg
+perl -pi -e "s|\@libexecdir\@|%{_libdir}/nagios/plugins|g" plugins.d/nagios-plugins.cfg_do_not_use
 
 %install
 rm -rf %{buildroot}
@@ -1448,7 +1450,8 @@ install -m0755 plugins-scripts/utils.sh %{buildroot}%{_libdir}/nagios/plugins/co
 
 # install the config files
 install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.cfg
-%{_sbindir}/convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
+#%{_sbindir}/convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
+install -m0644 plugins.d/nagios-plugins.cfg_do_not_use %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
 
 install -m0644 plugins.d/check_apt.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_apt.cfg
 install -m0644 plugins.d/check_breeze.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_breeze.cfg
