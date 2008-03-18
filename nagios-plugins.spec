@@ -150,6 +150,8 @@ Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
 Patch19:	nagios-plugins-utils.pm_fix.diff
 Patch20:	nagios-plugins-1.4.11-fix-pgsql-check.diff
+# http://sourceforge.net/tracker/index.php?func=detail&aid=1854415&group_id=29880&atid=397599
+Patch21:	nagios-plugins-check_dhcp-roguedhcpservercheck.diff
 #
 Patch300:	nagios-plugins-check_mysql_perf.diff
 Patch301:	check_mysql_perf-no_buggy_locales.diff
@@ -1213,6 +1215,7 @@ characteristics of a MySQL database.
 %patch18 -p0
 %patch19 -p1
 %patch20 -p1
+%patch21 -p0
 
 %patch300 -p0
 pushd check_mysql_perf*
