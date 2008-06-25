@@ -10,8 +10,8 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.11
-Release:	%mkrel 12
+Version:	1.4.12
+Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -149,7 +149,6 @@ Patch16:	nagios-plugins-check_mssql.sh_fix.diff
 Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
 Patch19:	nagios-plugins-utils.pm_fix.diff
-Patch20:	nagios-plugins-1.4.11-fix-pgsql-check.diff
 # http://sourceforge.net/tracker/index.php?func=detail&aid=1854415&group_id=29880&atid=397599
 Patch21:	nagios-plugins-check_dhcp-roguedhcpservercheck.diff
 #
@@ -1214,7 +1213,6 @@ characteristics of a MySQL database.
 %patch17 -p0
 %patch18 -p0
 %patch19 -p1
-%patch20 -p1
 %patch21 -p0
 
 %patch300 -p0
