@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.13
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -997,7 +997,7 @@ Primitive and in need of refinement test of MS spooler (with smbclient)
 %package -n	nagios-check_mssql
 Summary:	The check_mssql plugin for nagios
 Group:		Networking/Other
-Requires:	freetds_mssql
+Requires:	freetds
 Conflicts:	nagios-plugins < 1:1.4.11-3
 
 %description -n	nagios-check_mssql
