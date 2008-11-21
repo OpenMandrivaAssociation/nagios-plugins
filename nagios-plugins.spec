@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.13
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -1283,6 +1283,10 @@ export PATH_TO_APTGET=/usr/bin/apt-get
     --with-mysql=%{_prefix} \
     --with-ping-command="/bin/ping -n -U -w %d -c %d %s" \
     --with-ping6-command="%{_bindir}/ping6 -n -U -w %d -c %d %s" \
+    --with-ps-command="/bin/ps axwo 'stat uid pid ppid vsz rss pcpu etime comm args'" \
+    --with-ps-format="%s %d %d %d %d %d %f %s %s %n" \
+    --with-ps-varlist='procstat,&procuid,&procpid,&procppid,&procvsz,&procrss,&procpcpu,&procetime,procprog,&pos' \
+    --with-ps-cols=10 \
     --with-ipv6
 
 find . -type f -name "Makefile" -exec /usr/bin/perl -pi -e "s|-L/usr/lib|-L%{_libdir}|g" \{\} \;
@@ -1323,20 +1327,6 @@ done
 
 # anti recheck hack
 touch *
-
-# do this the hard way as it is not fool proof as is...
-cat >> config.h << EOF
-#define USE_IPV6 1
-#define PING6_COMMAND "/usr/bin/ping6 -n -U -c %d %s"
-#define PING6_PACKETS_FIRST 1
-#define PING_COMMAND "/bin/ping -n -U -w %d -c %d %s"
-#define PING_HAS_TIMEOUT 1
-#define PING_PACKETS_FIRST 1
-#define PS_COLS 8
-#define PS_COMMAND "/bin/ps axwo 'stat uid ppid vsz rss pcpu comm args'"
-#define PS_FORMAT "%s %d %d %d %d %f %s %n"
-#define PS_VARLIST procstat,&procuid,&procppid,&procvsz,&procrss,&procpcpu,procprog,&pos
-EOF
 
 make \
     CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl" \
