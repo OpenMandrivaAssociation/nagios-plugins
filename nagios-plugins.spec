@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.13
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -1213,7 +1213,7 @@ characteristics of a MySQL database.
 %patch17 -p0
 %patch18 -p0
 %patch19 -p1
-%patch21 -p0
+%patch21 -p1
 
 %patch300 -p0
 pushd check_mysql_perf*
