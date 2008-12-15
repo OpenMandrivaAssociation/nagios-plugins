@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.13
-Release:	%mkrel 6
+Release:	%mkrel 7
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -129,7 +129,7 @@ Source253:	check_wins.cfg
 #
 Source300:	check_mysql_perf.cfg
 #
-Patch0:		nagios-plugins-no_buggy_locales.diff
+Patch0:		nagios-plugins-1.4.13-no-buggy-locales.diff
 Patch1:		nagios-plugins-check_compaq_insight.diff
 Patch2:		nagios-plugins-wireshark.diff
 Patch3:		nagios-plugins-contrib-API.patch
@@ -150,7 +150,7 @@ Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
 Patch19:	nagios-plugins-utils.pm_fix.diff
 # http://sourceforge.net/tracker/index.php?func=detail&aid=1854415&group_id=29880&atid=397599
-Patch21:	nagios-plugins-check_dhcp-roguedhcpservercheck.diff
+Patch21:	nagios-plugins-1.4.13-check_dhcp-roguedhcpservercheck.diff
 #
 Patch300:	nagios-plugins-check_mysql_perf.diff
 Patch301:	check_mysql_perf-no_buggy_locales.diff
@@ -1594,6 +1594,13 @@ package, for example the nagios-check_apt package contains only this:
 
 EOF
 
+# make noarch pluginds installable under %{_datadir} also
+install -d -m 755 %{buildroot}%{_datadir}/nagios/plugins
+pushd %{buildroot}%{_datadir}/nagios/plugins
+ln -sf ../../../%_lib/nagios/plugins/utils.pm .
+ln -sf ../../../%_lib/nagios/plugins/utils.sh .
+popd
+
 %pre
 %{_sbindir}/useradd -r -M -s /bin/sh -d /var/log/nagios -c "system user for %{nsusr}" %{nsusr} >/dev/null 2>&1 || :
 %{_bindir}/gpasswd -a %{cmdusr} %{nsgrp} >/dev/null 2>&1 || :
@@ -1605,6 +1612,7 @@ fi
 %postun
 %_postun_userdel %{nsusr}
 
+%if %mdkversion < 200900
 %post -n nagios-check_apt
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
@@ -2468,6 +2476,7 @@ fi
 if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
+%endif
 
 %clean
 rm -rf %{buildroot}
@@ -2489,6 +2498,7 @@ rm -rf %{buildroot}
 %{_libdir}/nagios/plugins/contrib/packet_utils.pm
 %{_libdir}/nagios/plugins/contrib/utils.py
 %{_libdir}/nagios/plugins/contrib/utils.sh
+%{_datadir}/nagios/plugins
 
 %files -n nagios-check_apt
 %defattr(-,root,root)
