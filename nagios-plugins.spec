@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.13
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -153,6 +153,8 @@ Patch19:	nagios-plugins-utils.pm_fix.diff
 Patch21:	nagios-plugins-1.4.13-check_dhcp-roguedhcpservercheck.diff
 # http://sourceforge.net/tracker/?func=detail&atid=397599&aid=2430999&group_id=29880
 Patch22:	nagios-plugins-1.4.13-check_ldap_certificate.patch
+# http://sourceforge.net/tracker/index.php?func=detail&aid=1939022&group_id=29880&atid=397599
+Patch23:	nagios-plugins-1.4.13-sni-support.patch
 #
 Patch300:	nagios-plugins-check_mysql_perf.diff
 Patch301:	check_mysql_perf-no_buggy_locales.diff
@@ -1217,6 +1219,7 @@ characteristics of a MySQL database.
 %patch19 -p1
 %patch21 -p1
 %patch22 -p1
+%patch23 -p1
 
 %patch300 -p0
 pushd check_mysql_perf*
@@ -1247,8 +1250,7 @@ pushd plugins.d; %{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done
 cp %{SOURCE2} plugins.d/nagios-plugins.cfg_do_not_use
 
 %build
-export WANT_AUTOCONF_2_5="1"
-aclocal -I gl/m4 -I m4; autoheader; automake --add-missing --force-missing --copy; autoconf; autoreconf
+autoreconf -fi
 
 export PATH_TO_DIG=/usr/bin/dig
 export PATH_TO_FPING=/bin/fping
