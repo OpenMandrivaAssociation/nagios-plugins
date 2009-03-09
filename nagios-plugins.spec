@@ -18,7 +18,6 @@ URL:		http://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
 Source1:	http://www.consol.com/fileadmin/opensource/Nagios/check_mysql_perf-1.3.tar.gz
 Source2:	nagios-plugins.cfg_do_not_use
-Source100:	check_apt.cfg
 Source101:	check_breeze.cfg
 Source102:	check_by_ssh.cfg
 Source103:	check_cluster.cfg
@@ -207,16 +206,6 @@ separate "plugin" programs which return the status of the checks to Nagios.
 
 This package contains the basic plugins necessary for use with the Nagios
 package.  This package should install cleanly on almost any RPM-based system.
-
-%package -n	nagios-check_apt
-Summary:	The check_apt plugin for nagios
-Group:		Networking/Other
-Requires:	apt
-Conflicts:	nagios-plugins < 1:1.4.11-3
-
-%description -n	nagios-check_apt
-This plugin checks for software updates on systems that use package management
-systems based on the apt-get(8) command found in Debian GNU/Linux
 
 %package -n	nagios-check_breeze
 Summary:	The check_breeze plugin for nagios
@@ -1244,10 +1233,12 @@ popd
 
 mkdir plugins.d
 # magic by anssi
-pushd plugins.d; %{expand:%(for i in {100..152}; do echo "cp %%SOURCE$i ."; done)}; popd
-pushd plugins.d; %{expand:%(for i in {200..253}; do echo "cp %%SOURCE$i ."; done)}; popd
-pushd plugins.d; %{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done)}; popd
-cp %{SOURCE2} plugins.d/nagios-plugins.cfg_do_not_use
+pushd plugins.d
+%{expand:%(for i in {101..152}; do echo "cp %%SOURCE$i ."; done)}
+%{expand:%(for i in {200..253}; do echo "cp %%SOURCE$i ."; done)}
+%{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done)}
+cp %{SOURCE2} .
+popd
 
 %build
 autoreconf -fi
@@ -1274,7 +1265,6 @@ export PATH_TO_SWAP=
 export PATH_TO_SWAPINFO=
 export PATH_TO_UPTIME=/usr/bin/uptime
 export PATH_TO_WHO=/usr/bin/who
-export PATH_TO_APTGET=/usr/bin/apt-get
 
 %serverbuild
 
@@ -1449,7 +1439,6 @@ install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.c
 #%{_sbindir}/convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
 install -m0644 plugins.d/nagios-plugins.cfg_do_not_use %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
 
-install -m0644 plugins.d/check_apt.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_apt.cfg
 install -m0644 plugins.d/check_breeze.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_breeze.cfg
 install -m0644 plugins.d/check_by_ssh.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_by_ssh.cfg
 install -m0644 plugins.d/check_cluster.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_cluster.cfg
@@ -1592,10 +1581,10 @@ own sub packages. This means the older configuration file located here:
 %{_sysconfdir}/nagios/plugins.d/%{name}.cfg is not valid anymore. The file has 
 been renamed to %{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use and all 
 command related configuration per plugin has been put in the related plugin sub
-package, for example the nagios-check_apt package contains only this:
+package, for example the nagios-check_by_ssh package contains only this:
 
-%{_sysconfdir}/nagios/plugins.d/check_apt.cfg
-%{_libdir}/nagios/plugins/check_apt
+%{_sysconfdir}/nagios/plugins.d/check_by_ssh.cfg
+%{_libdir}/nagios/plugins/check_by_ssh
 
 EOF
 
@@ -1605,6 +1594,9 @@ pushd %{buildroot}%{_datadir}/nagios/plugins
 ln -sf ../../../%_lib/nagios/plugins/utils.pm .
 ln -sf ../../../%_lib/nagios/plugins/utils.sh .
 popd
+
+# delete unusable plugins
+rm -f %{buildroot}%{_libdir}/nagios/plugins/check_apt
 
 %pre
 %{_sbindir}/useradd -r -M -s /bin/sh -d /var/log/nagios -c "system user for %{nsusr}" %{nsusr} >/dev/null 2>&1 || :
@@ -1618,13 +1610,6 @@ fi
 %_postun_userdel %{nsusr}
 
 %if %mdkversion < 200900
-%post -n nagios-check_apt
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_apt
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
 
 %post -n nagios-check_breeze
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
@@ -2504,11 +2489,6 @@ rm -rf %{buildroot}
 %{_libdir}/nagios/plugins/contrib/utils.py
 %{_libdir}/nagios/plugins/contrib/utils.sh
 %{_datadir}/nagios/plugins
-
-%files -n nagios-check_apt
-%defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_apt.cfg
-%{_libdir}/nagios/plugins/check_apt
 
 %files -n nagios-check_breeze
 %defattr(-,root,root)
