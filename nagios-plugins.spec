@@ -1227,14 +1227,6 @@ pushd extra-plugins
 tar -zxf ../contrib/tarballs/check_bgp-1.0.tar.gz
 popd
 
-mkdir plugins.d
-# magic by anssi
-pushd plugins.d
-%{expand:%(for i in {101..152}; do echo "cp %%SOURCE$i ."; done)}
-%{expand:%(for i in {200..253}; do echo "cp %%SOURCE$i ."; done)}
-%{expand:%(for i in {300..300}; do echo "cp %%SOURCE$i ."; done)}
-cp %{SOURCE2} .
-popd
 
 %build
 autoreconf -fi
@@ -1342,9 +1334,6 @@ gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_timeout contrib/chec
 gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_uptime contrib/check_uptime.c \
     plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
 
-perl -pi -e "s|\@libexecdir\@|%{_libdir}/nagios/plugins|g" plugins.d/*.cfg
-perl -pi -e "s|\@libexecdir\@|%{_libdir}/nagios/plugins|g" plugins.d/nagios-plugins.cfg_do_not_use
-
 %install
 rm -rf %{buildroot}
 
@@ -1432,117 +1421,17 @@ install -m0755 plugins-scripts/utils.sh %{buildroot}%{_libdir}/nagios/plugins/co
 
 # install the config files
 install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.cfg
-#%{_sbindir}/convertcfg command.cfg commands > %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
-install -m0644 plugins.d/nagios-plugins.cfg_do_not_use %{buildroot}%{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
 
-install -m0644 plugins.d/check_breeze.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_breeze.cfg
-install -m0644 plugins.d/check_by_ssh.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_by_ssh.cfg
-install -m0644 plugins.d/check_cluster.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_cluster.cfg
-install -m0644 plugins.d/check_dhcp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_dhcp.cfg
-install -m0644 plugins.d/check_dig.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_dig.cfg
-install -m0644 plugins.d/check_disk.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_disk.cfg
-install -m0644 plugins.d/check_disk_smb.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_disk_smb.cfg
-install -m0644 plugins.d/check_dns.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_dns.cfg
-install -m0644 plugins.d/check_dummy.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_dummy.cfg
-install -m0644 plugins.d/check_file_age.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_file_age.cfg
-install -m0644 plugins.d/check_flexlm.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_flexlm.cfg
-install -m0644 plugins.d/check_fping.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_fping.cfg
-install -m0644 plugins.d/check_game.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_game.cfg
-install -m0644 plugins.d/check_hpjd.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_hpjd.cfg
-install -m0644 plugins.d/check_http.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_http.cfg
-install -m0644 plugins.d/check_icmp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_icmp.cfg
-install -m0644 plugins.d/check_ide_smart.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ide_smart.cfg
-install -m0644 plugins.d/check_ifoperstatus.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ifoperstatus.cfg
-install -m0644 plugins.d/check_ifstatus.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ifstatus.cfg
-install -m0644 plugins.d/check_ircd.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ircd.cfg
-install -m0644 plugins.d/check_ldap.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ldap.cfg
-install -m0644 plugins.d/check_load.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_load.cfg
-install -m0644 plugins.d/check_log.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_log.cfg
-install -m0644 plugins.d/check_mailq.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mailq.cfg
-install -m0644 plugins.d/check_mrtg.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mrtg.cfg
-install -m0644 plugins.d/check_mrtgtraf.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mrtgtraf.cfg
-install -m0644 plugins.d/check_mysql.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mysql.cfg
-install -m0644 plugins.d/check_mysql_query.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mysql_query.cfg
-install -m0644 plugins.d/check_nagios.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_nagios.cfg
-install -m0644 plugins.d/check_nt.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_nt.cfg
-install -m0644 plugins.d/check_ntp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ntp.cfg
-install -m0644 plugins.d/check_ntp_peer.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ntp_peer.cfg
-install -m0644 plugins.d/check_ntp_time.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ntp_time.cfg
-install -m0644 plugins.d/check_nwstat.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_nwstat.cfg
-install -m0644 plugins.d/check_oracle.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_oracle.cfg
-install -m0644 plugins.d/check_overcr.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_overcr.cfg
-install -m0644 plugins.d/check_pgsql.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_pgsql.cfg
-install -m0644 plugins.d/check_ping.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ping.cfg
-install -m0644 plugins.d/check_procs.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_procs.cfg
-install -m0644 plugins.d/check_radius.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_radius.cfg
-install -m0644 plugins.d/check_real.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_real.cfg
-install -m0644 plugins.d/check_rpc.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_rpc.cfg
-install -m0644 plugins.d/check_sensors.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_sensors.cfg
-install -m0644 plugins.d/check_smtp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_smtp.cfg
-install -m0644 plugins.d/check_snmp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_snmp.cfg
-install -m0644 plugins.d/check_ssh.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ssh.cfg
-install -m0644 plugins.d/check_swap.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_swap.cfg
-install -m0644 plugins.d/check_tcp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_tcp.cfg
-install -m0644 plugins.d/check_time.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_time.cfg
-install -m0644 plugins.d/check_ups.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ups.cfg
-install -m0644 plugins.d/check_users.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_users.cfg
-install -m0644 plugins.d/check_wave.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_wave.cfg
-#
-install -m0644 plugins.d/check_adptraid.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_adptraid.cfg
-install -m0644 plugins.d/check_apache.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_apache.cfg
-install -m0644 plugins.d/check_apc_ups.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_apc_ups.cfg
-install -m0644 plugins.d/check_appletalk.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_appletalk.cfg
-install -m0644 plugins.d/check_arping.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_arping.cfg
-install -m0644 plugins.d/check_asterisk.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_asterisk.cfg
-install -m0644 plugins.d/check_axis.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_axis.cfg
-install -m0644 plugins.d/check_backup.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_backup.cfg
-install -m0644 plugins.d/check_bgp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_bgp.cfg
-install -m0644 plugins.d/check_bgpstate.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_bgpstate.cfg
-install -m0644 plugins.d/check_ciscotemp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ciscotemp.cfg
-install -m0644 plugins.d/check_cluster2.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_cluster2.cfg
-install -m0644 plugins.d/check_compaq_insight.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_compaq_insight.cfg
-install -m0644 plugins.d/check_digitemp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_digitemp.cfg
-install -m0644 plugins.d/check_dlswcircuit.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_dlswcircuit.cfg
-install -m0644 plugins.d/check_dns_random.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_dns_random.cfg
-install -m0644 plugins.d/check_email_loop.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_email_loop.cfg
-install -m0644 plugins.d/check_frontpage.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_frontpage.cfg
-install -m0644 plugins.d/check_hprsc.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_hprsc.cfg
-install -m0644 plugins.d/check_hw.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_hw.cfg
-install -m0644 plugins.d/check_ica_master_browser.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ica_master_browser.cfg
-install -m0644 plugins.d/check_ica_metaframe_pub_apps.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ica_metaframe_pub_apps.cfg
-install -m0644 plugins.d/check_ica_program_neigbourhood.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ica_program_neigbourhood.cfg
-install -m0644 plugins.d/check_inodes.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_inodes.cfg
-install -m0644 plugins.d/check_ipxping.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ipxping.cfg
-install -m0644 plugins.d/check_javaproc.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_javaproc.cfg
-install -m0644 plugins.d/check_linux_raid.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_linux_raid.cfg
-install -m0644 plugins.d/check_log2.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_log2.cfg
-install -m0644 plugins.d/check_lotus.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_lotus.cfg
-install -m0644 plugins.d/check_maxchannels.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_maxchannels.cfg
-install -m0644 plugins.d/check_maxwanstate.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_maxwanstate.cfg
-install -m0644 plugins.d/check_mem.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mem.cfg
-install -m0644 plugins.d/check_mrtgext.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mrtgext.cfg
-install -m0644 plugins.d/check_ms_spooler.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_ms_spooler.cfg
-install -m0644 plugins.d/check_mssql.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mssql.cfg
-install -m0644 plugins.d/check_netapp.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_netapp.cfg
-install -m0644 plugins.d/check_nmap.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_nmap.cfg
-install -m0644 plugins.d/check_pcpmetric.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_pcpmetric.cfg
-install -m0644 plugins.d/check_pfstate.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_pfstate.cfg
-install -m0644 plugins.d/check_qmailq.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_qmailq.cfg
-install -m0644 plugins.d/check_rbl.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_rbl.cfg
-install -m0644 plugins.d/check_remote_nagios_status.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_remote_nagios_status.cfg
-install -m0644 plugins.d/check_sendim.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_sendim.cfg
-install -m0644 plugins.d/check_smart.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_smart.cfg
-install -m0644 plugins.d/check_smb.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_smb.cfg
-install -m0644 plugins.d/check_snmp_disk_monitor.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_snmp_disk_monitor.cfg
-install -m0644 plugins.d/check_snmp_printer.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_snmp_printer.cfg
-install -m0644 plugins.d/check_snmp_process_monitor.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_snmp_process_monitor.cfg
-install -m0644 plugins.d/check_snmp_procs.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_snmp_procs.cfg
-install -m0644 plugins.d/check_sockets.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_sockets.cfg
-install -m0644 plugins.d/check_timeout.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_timeout.cfg
-install -m0644 plugins.d/check_traceroute.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_traceroute.cfg
-install -m0644 plugins.d/check_uptime.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_uptime.cfg
-install -m0644 plugins.d/check_wins.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_wins.cfg
-install -m0644 plugins.d/check_mysql_perf.cfg %{buildroot}%{_sysconfdir}/nagios/plugins.d/check_mysql_perf.cfg
+# magic by anssi
+pushd %{buildroot}%{_sysconfdir}/nagios/plugins.d
+%{expand:%(for i in {101..152}; do echo "install -m 644 %%SOURCE$i ."; done)}
+%{expand:%(for i in {200..253}; do echo "install -m 644 %%SOURCE$i ."; done)}
+%{expand:%(for i in {300..300}; do echo "install -m 644 %%SOURCE$i ."; done)}
+install -m 644 %{SOURCE2} .
+popd
+
+perl -pi -e 's|\@libexecdir\@|%{_libdir}/nagios/plugins|g' \
+    %{buildroot}%{_sysconfdir}/nagios/plugins.d/*
 
 # fix bad paths (again!)
 for i in check_breeze check_disk_smb check_file_age check_flexlm check_ifoperstatus \
