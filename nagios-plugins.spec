@@ -2470,8 +2470,8 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 %doc AUTHORS CODING ChangeLog FAQ LEGAL NEWS README* REQUIREMENTS SUPPORT README.urpmi
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/command-old-style.cfg
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/command-old-style.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
 %defattr(0755,root,root)
 %dir %{_libdir}/nagios
 %dir %{_libdir}/nagios/plugins
@@ -2488,243 +2488,243 @@ rm -rf %{buildroot}
 
 %files -n nagios-check_breeze
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_breeze.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_breeze.cfg
 %{_libdir}/nagios/plugins/check_breeze
 
 %files -n nagios-check_by_ssh
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_by_ssh.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_by_ssh.cfg
 %{_libdir}/nagios/plugins/check_by_ssh
 
 %files -n nagios-check_cluster
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_cluster.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_cluster.cfg
 %{_libdir}/nagios/plugins/check_cluster
 
 %files -n nagios-check_dhcp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dhcp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dhcp.cfg
 %attr(4550,root,nagios) %{_libdir}/nagios/plugins/check_dhcp
 
 %files -n nagios-check_dig
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dig.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dig.cfg
 %{_libdir}/nagios/plugins/check_dig
 
 %files -n nagios-check_disk
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_disk.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_disk.cfg
 %{_libdir}/nagios/plugins/check_disk
 
 %files -n nagios-check_disk_smb
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_disk_smb.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_disk_smb.cfg
 %{_libdir}/nagios/plugins/check_disk_smb
 
 %files -n nagios-check_dns
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dns.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dns.cfg
 %{_libdir}/nagios/plugins/check_dns
 
 %files -n nagios-check_dummy
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dummy.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dummy.cfg
 %{_libdir}/nagios/plugins/check_dummy
 
 %files -n nagios-check_file_age
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_file_age.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_file_age.cfg
 %{_libdir}/nagios/plugins/check_file_age
 
 %files -n nagios-check_flexlm
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_flexlm.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_flexlm.cfg
 %{_libdir}/nagios/plugins/check_flexlm
 
 %files -n nagios-check_fping
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_fping.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_fping.cfg
 %{_libdir}/nagios/plugins/check_fping
 
 %files -n nagios-check_game
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_game.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_game.cfg
 %{_libdir}/nagios/plugins/check_game
 
 %files -n nagios-check_hpjd
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_hpjd.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_hpjd.cfg
 %{_libdir}/nagios/plugins/check_hpjd
 
 %files -n nagios-check_http
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_http.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_http.cfg
 %{_libdir}/nagios/plugins/check_http
 
 %files -n nagios-check_icmp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_icmp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_icmp.cfg
 %attr(4550,root,nagios) %{_libdir}/nagios/plugins/check_icmp
 
 %files -n nagios-check_ide_smart
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ide_smart.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ide_smart.cfg
 %{_libdir}/nagios/plugins/check_ide_smart
 
 %files -n nagios-check_ifoperstatus
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ifoperstatus.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ifoperstatus.cfg
 %{_libdir}/nagios/plugins/check_ifoperstatus
 
 %files -n nagios-check_ifstatus
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ifstatus.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ifstatus.cfg
 %{_libdir}/nagios/plugins/check_ifstatus
 
 %files -n nagios-check_ircd
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ircd.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ircd.cfg
 %{_libdir}/nagios/plugins/check_ircd
 
 %files -n nagios-check_ldap
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ldap.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ldap.cfg
 %{_libdir}/nagios/plugins/check_ldap
 %{_libdir}/nagios/plugins/check_ldaps
 
 %files -n nagios-check_load
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_load.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_load.cfg
 %{_libdir}/nagios/plugins/check_load
 
 %files -n nagios-check_log
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_log.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_log.cfg
 %{_libdir}/nagios/plugins/check_log
 
 %files -n nagios-check_mailq
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mailq.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mailq.cfg
 %{_libdir}/nagios/plugins/check_mailq
 
 %files -n nagios-check_mrtg
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mrtg.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mrtg.cfg
 %{_libdir}/nagios/plugins/check_mrtg
 
 %files -n nagios-check_mrtgtraf
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mrtgtraf.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mrtgtraf.cfg
 %{_libdir}/nagios/plugins/check_mrtgtraf
 
 %files -n nagios-check_mysql
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql.cfg
 %{_libdir}/nagios/plugins/check_mysql
 
 %files -n nagios-check_mysql_query
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql_query.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql_query.cfg
 %{_libdir}/nagios/plugins/check_mysql_query
 
 %files -n nagios-check_nagios
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nagios.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nagios.cfg
 %{_libdir}/nagios/plugins/check_nagios
 
 %files -n nagios-check_nt
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nt.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nt.cfg
 %{_libdir}/nagios/plugins/check_nt
 
 %files -n nagios-check_ntp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ntp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ntp.cfg
 %{_libdir}/nagios/plugins/check_ntp
 
 %files -n nagios-check_ntp_peer
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ntp_peer.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ntp_peer.cfg
 %{_libdir}/nagios/plugins/check_ntp_peer
 
 %files -n nagios-check_ntp_time
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ntp_time.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ntp_time.cfg
 %{_libdir}/nagios/plugins/check_ntp_time
 
 %files -n nagios-check_nwstat
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nwstat.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nwstat.cfg
 %{_libdir}/nagios/plugins/check_nwstat
 
 %files -n nagios-check_oracle
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_oracle.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_oracle.cfg
 %{_libdir}/nagios/plugins/check_oracle
 
 %files -n nagios-check_overcr
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_overcr.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_overcr.cfg
 %{_libdir}/nagios/plugins/check_overcr
 
 %files -n nagios-check_pgsql
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_pgsql.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_pgsql.cfg
 %{_libdir}/nagios/plugins/check_pgsql
 
 %files -n nagios-check_ping
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ping.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ping.cfg
 %{_libdir}/nagios/plugins/check_ping
 
 %files -n nagios-check_procs
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_procs.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_procs.cfg
 %{_libdir}/nagios/plugins/check_procs
 
 %files -n nagios-check_radius
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_radius.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_radius.cfg
 %{_libdir}/nagios/plugins/check_radius
 
 %files -n nagios-check_real
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_real.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_real.cfg
 %{_libdir}/nagios/plugins/check_real
 
 %files -n nagios-check_rpc
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_rpc.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_rpc.cfg
 %{_libdir}/nagios/plugins/check_rpc
 
 %files -n nagios-check_sensors
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_sensors.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_sensors.cfg
 %{_libdir}/nagios/plugins/check_sensors
 
 %files -n nagios-check_smtp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_smtp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_smtp.cfg
 %{_libdir}/nagios/plugins/check_smtp
 
 %files -n nagios-check_snmp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp.cfg
 %{_libdir}/nagios/plugins/check_snmp
 
 %files -n nagios-check_ssh
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ssh.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ssh.cfg
 %{_libdir}/nagios/plugins/check_ssh
 
 %files -n nagios-check_swap
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_swap.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_swap.cfg
 %{_libdir}/nagios/plugins/check_swap
 
 %files -n nagios-check_tcp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_tcp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_tcp.cfg
 %{_libdir}/nagios/plugins/check_tcp
 %{_libdir}/nagios/plugins/check_imap
 %{_libdir}/nagios/plugins/check_spop
@@ -2740,297 +2740,297 @@ rm -rf %{buildroot}
 
 %files -n nagios-check_time
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_time.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_time.cfg
 %{_libdir}/nagios/plugins/check_time
 
 %files -n nagios-check_ups
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ups.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ups.cfg
 %{_libdir}/nagios/plugins/check_ups
 
 %files -n nagios-check_users
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_users.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_users.cfg
 %{_libdir}/nagios/plugins/check_users
 
 %files -n nagios-check_wave
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_wave.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_wave.cfg
 %{_libdir}/nagios/plugins/check_wave
 
 %files -n nagios-check_adptraid
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_adptraid.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_adptraid.cfg
 %{_libdir}/nagios/plugins/contrib/check_adptraid.sh
 
 %files -n nagios-check_apache
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_apache.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_apache.cfg
 %{_libdir}/nagios/plugins/contrib/check_apache.pl
 
 %files -n nagios-check_apc_ups
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_apc_ups.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_apc_ups.cfg
 %{_libdir}/nagios/plugins/contrib/check_apc_ups.pl
 
 %files -n nagios-check_appletalk
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_appletalk.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_appletalk.cfg
 %{_libdir}/nagios/plugins/contrib/check_appletalk.pl
 
 %files -n nagios-check_arping
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_arping.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_arping.cfg
 %attr(4550,root,nagios) %{_libdir}/nagios/plugins/contrib/check_arping.pl
 
 %files -n nagios-check_asterisk
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_asterisk.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_asterisk.cfg
 %{_libdir}/nagios/plugins/contrib/check_asterisk.pl
 
 %files -n nagios-check_axis
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_axis.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_axis.cfg
 %{_libdir}/nagios/plugins/contrib/check_axis.sh
 
 %files -n nagios-check_backup
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_backup.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_backup.cfg
 %{_libdir}/nagios/plugins/contrib/check_backup.pl
 
 %files -n nagios-check_bgp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_bgp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_bgp.cfg
 %{_libdir}/nagios/plugins/contrib/check_bgp
 
 %files -n nagios-check_bgpstate
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_bgpstate.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_bgpstate.cfg
 %{_libdir}/nagios/plugins/contrib/check_bgpstate.pl
 
 %files -n nagios-check_ciscotemp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ciscotemp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ciscotemp.cfg
 %{_libdir}/nagios/plugins/contrib/check_ciscotemp.pl
 
 %files -n nagios-check_cluster2
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_cluster2.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_cluster2.cfg
 %{_libdir}/nagios/plugins/contrib/check_cluster2
 
 %files -n nagios-check_compaq_insight
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_compaq_insight.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_compaq_insight.cfg
 %{_libdir}/nagios/plugins/contrib/check_compaq_insight.pl
 
 %files -n nagios-check_digitemp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_digitemp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_digitemp.cfg
 %{_libdir}/nagios/plugins/contrib/check_digitemp.pl
 
 %files -n nagios-check_dlswcircuit
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dlswcircuit.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dlswcircuit.cfg
 %{_libdir}/nagios/plugins/contrib/check_dlswcircuit.pl
 
 %files -n nagios-check_dns_random
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/domains.list
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dns_random.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/domains.list
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_dns_random.cfg
 %{_libdir}/nagios/plugins/contrib/check_dns_random.pl
 
 %files -n nagios-check_email_loop
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_email_loop.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_email_loop.cfg
 %{_libdir}/nagios/plugins/contrib/check_email_loop.pl
 
 %files -n nagios-check_frontpage
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_frontpage.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_frontpage.cfg
 %{_libdir}/nagios/plugins/contrib/check_frontpage
 
 %files -n nagios-check_hprsc
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_hprsc.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_hprsc.cfg
 %{_libdir}/nagios/plugins/contrib/check_hprsc.pl
 
 %files -n nagios-check_hw
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_hw.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_hw.cfg
 %{_libdir}/nagios/plugins/contrib/check_hw.sh
 
 %files -n nagios-check_ica_master_browser
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ica_master_browser.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ica_master_browser.cfg
 %{_libdir}/nagios/plugins/contrib/check_ica_master_browser.pl
 
 %files -n nagios-check_ica_metaframe_pub_apps
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ica_metaframe_pub_apps.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ica_metaframe_pub_apps.cfg
 %{_libdir}/nagios/plugins/contrib/check_ica_metaframe_pub_apps.pl
 
 %files -n nagios-check_ica_program_neigbourhood
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ica_program_neigbourhood.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ica_program_neigbourhood.cfg
 %{_libdir}/nagios/plugins/contrib/check_ica_program_neigbourhood.pl
 
 %files -n nagios-check_inodes
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_inodes.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_inodes.cfg
 %{_libdir}/nagios/plugins/contrib/check_inodes.pl
 
 %files -n nagios-check_ipxping
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ipxping.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ipxping.cfg
 %{_libdir}/nagios/plugins/contrib/check_ipxping
 
 %files -n nagios-check_javaproc
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_javaproc.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_javaproc.cfg
 %{_libdir}/nagios/plugins/contrib/check_javaproc.pl
 
 %files -n nagios-check_linux_raid
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_linux_raid.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_linux_raid.cfg
 %{_libdir}/nagios/plugins/contrib/check_linux_raid.pl
 
 %files -n nagios-check_log2
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_log2.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_log2.cfg
 %{_libdir}/nagios/plugins/contrib/check_log2.pl
 
 %files -n nagios-check_lotus
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_lotus.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_lotus.cfg
 %{_libdir}/nagios/plugins/contrib/check_lotus.pl
 
 %files -n nagios-check_maxchannels
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_maxchannels.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_maxchannels.cfg
 %{_libdir}/nagios/plugins/contrib/check_maxchannels.pl
 
 %files -n nagios-check_maxwanstate
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_maxwanstate.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_maxwanstate.cfg
 %{_libdir}/nagios/plugins/contrib/check_maxwanstate.pl
 
 %files -n nagios-check_mem
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mem.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mem.cfg
 %{_libdir}/nagios/plugins/contrib/check_mem.pl
 
 %files -n nagios-check_mrtgext
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mrtgext.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mrtgext.cfg
 %{_libdir}/nagios/plugins/contrib/check_mrtgext.pl
 
 %files -n nagios-check_ms_spooler
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ms_spooler.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_ms_spooler.cfg
 %{_libdir}/nagios/plugins/contrib/check_ms_spooler.pl
 
 %files -n nagios-check_mssql
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mssql.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mssql.cfg
 %{_libdir}/nagios/plugins/contrib/check_mssql.sh
 
 %files -n nagios-check_netapp
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_netapp.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_netapp.cfg
 %{_libdir}/nagios/plugins/contrib/check_netapp.pl
 
 %files -n nagios-check_nmap
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nmap.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_nmap.cfg
 %{_libdir}/nagios/plugins/contrib/check_nmap.py
 
 %files -n nagios-check_pcpmetric
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_pcpmetric.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_pcpmetric.cfg
 %{_libdir}/nagios/plugins/contrib/check_pcpmetric.py
 
 %files -n nagios-check_pfstate
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_pfstate.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_pfstate.cfg
 %{_libdir}/nagios/plugins/contrib/check_pfstate
 
 %files -n nagios-check_qmailq
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_qmailq.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_qmailq.cfg
 %{_libdir}/nagios/plugins/contrib/check_qmailq.pl
 
 %files -n nagios-check_rbl
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_rbl.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_rbl.cfg
 %{_libdir}/nagios/plugins/contrib/check_rbl
 
 %files -n nagios-check_remote_nagios_status
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_remote_nagios_status.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_remote_nagios_status.cfg
 %{_libdir}/nagios/plugins/contrib/check_remote_nagios_status.pl
 
 %files -n nagios-check_sendim
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_sendim.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_sendim.cfg
 %{_libdir}/nagios/plugins/contrib/check_sendim.pl
 
 %files -n nagios-check_smart
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_smart.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_smart.cfg
 %{_libdir}/nagios/plugins/contrib/check_smart.pl
 
 %files -n nagios-check_smb
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_smb.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_smb.cfg
 %{_libdir}/nagios/plugins/contrib/check_smb.sh
 
 %files -n nagios-check_snmp_disk_monitor
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_disk_monitor.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_disk_monitor.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_disk_monitor.pl
 
 %files -n nagios-check_snmp_printer
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_printer.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_printer.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_printer.pl
 
 %files -n nagios-check_snmp_process_monitor
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_process_monitor.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_process_monitor.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_process_monitor.pl
 
 %files -n nagios-check_snmp_procs
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_procs.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_snmp_procs.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_procs.pl
 
 %files -n nagios-check_sockets
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_sockets.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_sockets.cfg
 %{_libdir}/nagios/plugins/contrib/check_sockets.pl
 
 %files -n nagios-check_timeout
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_timeout.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_timeout.cfg
 %{_libdir}/nagios/plugins/contrib/check_timeout
 
 %files -n nagios-check_traceroute
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_traceroute.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_traceroute.cfg
 %{_libdir}/nagios/plugins/contrib/check_traceroute.pl
 
 %files -n nagios-check_uptime
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_uptime.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_uptime.cfg
 %{_libdir}/nagios/plugins/contrib/check_uptime
 
 %files -n nagios-check_wins
 %defattr(-,root,root)
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_wins.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_wins.cfg
 %{_libdir}/nagios/plugins/contrib/check_wins.pl
 
 %files -n nagios-check_mysql_perf
 %defattr(-,root,root)
 %doc check_mysql_perf-*/README
-%attr(0644,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql_perf.cfg
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql_perf.cfg
 %{_libdir}/nagios/plugins/check_mysql_perf
