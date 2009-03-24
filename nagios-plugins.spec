@@ -11,12 +11,11 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.13
-Release:	%mkrel 10
+Release:	%mkrel 11
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
-Source1:	http://www.consol.com/fileadmin/opensource/Nagios/check_mysql_perf-1.3.tar.gz
 Source2:	nagios-plugins.cfg_do_not_use
 Source101:	check_breeze.cfg
 Source102:	check_by_ssh.cfg
@@ -126,8 +125,6 @@ Source251:	check_traceroute.cfg
 Source252:	check_uptime.cfg
 Source253:	check_wins.cfg
 #
-Source300:	check_mysql_perf.cfg
-#
 Patch0:		nagios-plugins-1.4.13-no-buggy-locales.diff
 Patch1:		nagios-plugins-check_compaq_insight.diff
 Patch2:		nagios-plugins-wireshark.diff
@@ -155,8 +152,6 @@ Patch22:	nagios-plugins-1.4.13-check_ldap_certificate.patch
 # http://sourceforge.net/tracker/index.php?func=detail&aid=1939022&group_id=29880&atid=397599
 Patch23:	nagios-plugins-1.4.13-sni-support.patch
 #
-Patch300:	nagios-plugins-check_mysql_perf.diff
-Patch301:	check_mysql_perf-no_buggy_locales.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 # we seem to need zillions of requires and buildrequires, 
@@ -1174,18 +1169,8 @@ Conflicts:	nagios-plugins < 1:1.4.11-3
 %description -n	nagios-check_wins
 Perl Check WINS plugin for Nagios.
 
-%package -n	nagios-check_mysql_perf
-Summary:	The check_mysql_perf plugin for nagios
-Group:		Networking/Other
-URL:		http://www.consol.com/opensource/nagios/check-mysql-perf
-
-%description -n	nagios-check_mysql_perf
-A plugin for Nagios that allows you to monitor various performance-related
-characteristics of a MySQL database.
-
 %prep
-
-%setup -q -n %{name}-%{version} -a1
+%setup -q
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
@@ -1209,12 +1194,6 @@ characteristics of a MySQL database.
 %patch21 -p1
 %patch22 -p1
 %patch23 -p1
-
-%patch300 -p0
-pushd check_mysql_perf*
-%patch301 -p0
-cp -p plugins/check_mysql_perf.c plugins/my_utils.h ../plugins/
-popd
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
@@ -1426,7 +1405,6 @@ install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.c
 pushd %{buildroot}%{_sysconfdir}/nagios/plugins.d
 %{expand:%(for i in {101..152}; do echo "install -m 644 %%SOURCE$i ."; done)}
 %{expand:%(for i in {200..253}; do echo "install -m 644 %%SOURCE$i ."; done)}
-%{expand:%(for i in {300..300}; do echo "install -m 644 %%SOURCE$i ."; done)}
 install -m 644 %{SOURCE2} .
 popd
 
@@ -2344,13 +2322,6 @@ if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
 
-%post -n nagios-check_mysql_perf
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mysql_perf
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
 %endif
 
 %clean
@@ -2917,9 +2888,3 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_wins.cfg
 %{_libdir}/nagios/plugins/contrib/check_wins.pl
-
-%files -n nagios-check_mysql_perf
-%defattr(-,root,root)
-%doc check_mysql_perf-*/README
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/nagios/plugins.d/check_mysql_perf.cfg
-%{_libdir}/nagios/plugins/check_mysql_perf
