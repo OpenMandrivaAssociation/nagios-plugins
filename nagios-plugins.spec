@@ -10,8 +10,8 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.13
-Release:	%mkrel 13
+Version:	1.4.14
+Release:	%mkrel 1
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -125,10 +125,9 @@ Source251:	check_traceroute.cfg
 Source252:	check_uptime.cfg
 Source253:	check_wins.cfg
 #
-Patch0:		nagios-plugins-1.4.13-no-buggy-locales.diff
 Patch1:		nagios-plugins-check_compaq_insight.diff
 Patch2:		nagios-plugins-wireshark.diff
-Patch3:		nagios-plugins-contrib-API.patch
+Patch3:		nagios-plugins-1.4.14-contrib-API.patch
 Patch4:		nagios-plugins-check_ipxping.diff
 Patch5:		command.cfg.diff
 Patch6:		nagios-plugins-check_ping-socket-filter-warning.diff
@@ -146,11 +145,9 @@ Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
 Patch19:	nagios-plugins-utils.pm_fix.diff
 # http://sourceforge.net/tracker/index.php?func=detail&aid=1854415&group_id=29880&atid=397599
-Patch21:	nagios-plugins-1.4.13-check_dhcp-roguedhcpservercheck.diff
+Patch21:	nagios-plugins-1.4.14-check_dhcp-roguedhcpservercheck.patch
 # http://sourceforge.net/tracker/?func=detail&atid=397599&aid=2430999&group_id=29880
-Patch22:	nagios-plugins-1.4.13-check_ldap_certificate.patch
-# http://sourceforge.net/tracker/index.php?func=detail&aid=1939022&group_id=29880&atid=397599
-Patch23:	nagios-plugins-1.4.13-sni-support.patch
+Patch22:	nagios-plugins-1.4.14-check_ldap_certificate.patch
 #
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -1171,7 +1168,6 @@ Perl Check WINS plugin for Nagios.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
@@ -1193,7 +1189,6 @@ Perl Check WINS plugin for Nagios.
 %patch19 -p1
 %patch21 -p1
 %patch22 -p1
-%patch23 -p1
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
