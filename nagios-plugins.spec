@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.14
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -203,6 +203,7 @@ package.  This package should install cleanly on almost any RPM-based system.
 Summary:	The check_breeze plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_breeze
 This plugin reports the signal strength of a Breezecom wireless equipment
@@ -284,6 +285,7 @@ of the <state> argument with optional text
 Summary:	The check_file_age plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_file_age
 This package contains the check_file_age plugin for nagios.
@@ -292,6 +294,7 @@ This package contains the check_file_age plugin for nagios.
 Summary:	The check_flexlm plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_flexlm
 Check available flexlm license managers.
@@ -357,6 +360,7 @@ This plugin checks a local hard drive with the (Linux specific) SMART interface
 Summary:	The check_ifoperstatus plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_ifoperstatus
 check_ifoperstatus plugin for Nagios monitors operational status of a
@@ -366,6 +370,7 @@ particular network interface on the target host.
 Summary:	The check_ifstatus plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_ifstatus
 check_ifstatus plugin for Nagios monitors operational status of each network
@@ -375,6 +380,7 @@ interface on the target host.
 Summary:	The check_ircd plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_ircd
 Perl Check IRCD plugin for Nagios
@@ -399,6 +405,7 @@ This plugin tests the current system load average.
 Summary:	The check_log plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_log
 Log file pattern detector plugin for Nagios
@@ -513,6 +520,7 @@ to gather the requested system information.
 Summary:	The check_oracle plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_oracle
 Check Oracle status.
@@ -572,6 +580,7 @@ This plugin tests the REAL service on the specified host.
 Summary:	The check_rpc plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_rpc
 Check if a rpc service is registered and running using:
@@ -582,6 +591,7 @@ Summary:	The check_sensors plugin for nagios
 Group:		Networking/Other
 Requires:	lm_sensors
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_sensors
 This plugin checks hardware status using the lm_sensors package.
@@ -658,6 +668,7 @@ system and generates an error if the number exceeds the thresholds specified.
 Summary:	The check_wave plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_wave
 This package contains the check_wave plugin for nagios.
@@ -914,6 +925,7 @@ Perl Check java processes plugin for Nagios.
 Summary:	The check_linux_raid plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_linux_raid
 The check_linux_raid plugin for nagios.
@@ -1031,6 +1043,7 @@ system.
 Summary:	The check_qmailq plugin for nagios
 Group:		Networking/Other
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_qmailq
 This plugin allows you to check the number of Mails in a qmail-queue.
@@ -1079,6 +1092,7 @@ Summary:	The check_smb plugin for nagios
 Group:		Networking/Other
 Requires:	samba-client
 Conflicts:	nagios-plugins < 1:1.4.11-3
+Requires:	nagios-plugins
 
 %description -n	nagios-check_smb
 Samba status check.
