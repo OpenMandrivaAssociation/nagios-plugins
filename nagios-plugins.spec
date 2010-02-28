@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.14
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPL
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -41,8 +41,6 @@ Source121:	check_ldap.cfg
 Source122:	check_load.cfg
 Source123:	check_log.cfg
 Source124:	check_mailq.cfg
-Source125:	check_mrtg.cfg
-Source126:	check_mrtgtraf.cfg
 Source127:	check_mysql.cfg
 Source128:	check_mysql_query.cfg
 Source129:	check_nagios.cfg
@@ -418,32 +416,6 @@ Conflicts:	nagios-plugins < 1:1.4.11-3
 %description -n	nagios-check_mailq
 Checks the number of messages in the mail queue (supports multiple sendmail
 queues, qmail)
-
-%package -n	nagios-check_mrtg
-Summary:	The check_mrtg plugin for nagios
-Group:		Networking/Other
-Requires:	mrtg
-Obsoletes:	nagios-mrtg
-Conflicts:	nagios-plugins < 1:1.4.11-3
-
-%description -n	nagios-check_mrtg
-This plugin will check either the average or maximum value of one of the two
-variables recorded in an MRTG log file.
-
-%package -n	nagios-check_mrtgtraf
-Summary:	The check_mrtgtraf plugin for nagios
-Group:		Networking/Other
-Requires:	mrtg
-Obsoletes:	nagios-mrtg
-Conflicts:	nagios-plugins < 1:1.4.11-3
-
-%description -n	nagios-check_mrtgtraf
-This plugin will check the incoming/outgoing transfer rates of a router,
-switch, etc recorded in an MRTG log. If the newest log entry is older than
-<expire_minutes>, a WARNING status is returned. If either the incoming or
-outgoing rates exceed the <icl> or <ocl> thresholds (in Bytes/sec), a CRITICAL
-status results. If either of the rates exceed the <iwl> or <owl> thresholds
-(in Bytes/sec), a WARNING status results.
 
 %package -n	nagios-check_mysql
 Summary:	The check_mysql plugin for nagios
@@ -1412,7 +1384,8 @@ install -m0644 command.cfg %{buildroot}%{_sysconfdir}/nagios/command-old-style.c
 
 # magic by anssi
 pushd %{buildroot}%{_sysconfdir}/nagios/plugins.d
-%{expand:%(for i in {101..152}; do echo "install -m 644 %%SOURCE$i ."; done)}
+%{expand:%(for i in {101..124}; do echo "install -m 644 %%SOURCE$i ."; done)}
+%{expand:%(for i in {127..152}; do echo "install -m 644 %%SOURCE$i ."; done)}
 %{expand:%(for i in {200..253}; do echo "install -m 644 %%SOURCE$i ."; done)}
 install -m 644 %{SOURCE2} .
 popd
@@ -1469,6 +1442,9 @@ popd
 
 # delete unusable plugins
 rm -f %{buildroot}%{_libdir}/nagios/plugins/check_apt
+rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtg
+rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtgtraf
+
 
 %pre
 %{_sbindir}/useradd -r -M -s /bin/sh -d /var/log/nagios -c "system user for %{nsusr}" %{nsusr} >/dev/null 2>&1 || :
@@ -1671,22 +1647,6 @@ fi
 %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 
 %postun -n nagios-check_mailq
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mrtg
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mrtg
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mrtgtraf
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mrtgtraf
 if [ "$1" = "0" ]; then
     %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
 fi
@@ -2475,16 +2435,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mailq.cfg
 %{_libdir}/nagios/plugins/check_mailq
-
-%files -n nagios-check_mrtg
-%defattr(-,root,root)
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mrtg.cfg
-%{_libdir}/nagios/plugins/check_mrtg
-
-%files -n nagios-check_mrtgtraf
-%defattr(-,root,root)
-%config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mrtgtraf.cfg
-%{_libdir}/nagios/plugins/check_mrtgtraf
 
 %files -n nagios-check_mysql
 %defattr(-,root,root)
