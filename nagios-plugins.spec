@@ -11,8 +11,8 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.14
-Release:	%mkrel 4
-License:	GPL
+Release:	%mkrel 5
+License:	GPLv2+
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
