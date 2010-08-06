@@ -10,8 +10,8 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.14
-Release:	%mkrel 8
+Version:	1.4.15
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -143,30 +143,18 @@ Patch17:	nagios-plugins-check_nmap.py_fix.diff
 Patch18:	nagios-plugins-check_inodes.pl_fix.diff
 Patch19:	nagios-plugins-utils.pm_fix.diff
 # http://sourceforge.net/tracker/index.php?func=detail&aid=1854415&group_id=29880&atid=397599
-Patch21:	nagios-plugins-1.4.14-check_dhcp-roguedhcpservercheck.patch
+Patch21:	nagios-plugins-1.4.15-check_dhcp-roguedhcpservercheck.patch
 # http://sourceforge.net/tracker/?func=detail&atid=397599&aid=2430999&group_id=29880
-Patch22:	nagios-plugins-1.4.14-check_ldap_certificate.patch
+Patch22:	nagios-plugins-1.4.15-check_ldap_certificate.patch
+Patch23:	nagios-plugins-1.4.15-fix-format-errors.patch
 #
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
-# we seem to need zillions of requires and buildrequires, 
-# well fine as long as it does the trick...
-Requires:	coreutils
-Requires:	gawk
-Requires:	grep
-Requires:	perl
-Requires:	shadow-utils
 BuildRequires:	cvs
 BuildRequires:	mysql-devel
-BuildRequires:	autoconf2.5
-BuildRequires:	automake
-BuildRequires:	libtool
 BuildRequires:	bind-utils
-BuildRequires:	coreutils
 BuildRequires:	fping
-BuildRequires:	gawk
 BuildRequires:	gettext-devel
-BuildRequires:	grep
 BuildRequires:	libsasl-devel
 BuildRequires:	net-snmp-utils
 BuildRequires:	ntp
@@ -175,7 +163,6 @@ BuildRequires:	openldap-devel
 BuildRequires:	openssh-clients
 BuildRequires:	openssl-devel
 BuildRequires:	pam-devel
-BuildRequires:	perl
 BuildRequires:	postgresql-devel
 BuildRequires:	python
 BuildRequires:	radiusclient-ng-devel
@@ -183,7 +170,6 @@ BuildRequires:	samba-client
 BuildRequires:	shadow-utils
 BuildRequires:	traceroute
 BuildRequires:	zlib-devel
-BuildRequires:	file
 Epoch:		1
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -1175,6 +1161,7 @@ Perl Check WINS plugin for Nagios.
 %patch19 -p1
 %patch21 -p1
 %patch22 -p1
+%patch23 -p1
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
@@ -1271,28 +1258,33 @@ done
 # anti recheck hack
 touch *
 
-make \
-    CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl" \
-    CFLAGS="$CFLAGS" \
-    LDFLAGS="-L. -L%{_libdir}"
+export CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl"
+
+make
 
 make -C plugins \
-    CPPFLAGS="-I%{_includedir}/ldap -I%{_includedir}/mysql -I%{_includedir}/pgsql -I%{_includedir}/openssl" \
-    CFLAGS="$CFLAGS" \
-    LDFLAGS="-L. -L%{_libdir}" check_ide_smart check_ldap check_pgsql check_radius
+    check_ide_smart check_ldap check_pgsql check_radius
 
-gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_cluster2 contrib/check_cluster2.c
+export CPPFLAGS="-I. -Igl -Iplugins -Ilib"
+export LIBS="lib/libnagiosplug.a gl/libgnu.a" 
 
-gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_rbl contrib/check_rbl.c \
-    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
+gcc $CFLAGS $CPPFLAGS -o contrib/check_cluster2 contrib/check_cluster2.c \
+    $LIBS
 
-gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_ipxping contrib/check_ipxping.c \
-    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
+gcc $CFLAGS $CPPFLAGS -o contrib/check_rbl contrib/check_rbl.c \
+    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o \
+    $LIBS
 
-gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_timeout contrib/check_timeout.c
+gcc $CFLAGS $CPPFLAGS -o contrib/check_ipxping contrib/check_ipxping.c \
+    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o \
+    $LIBS
 
-gcc $CFLAGS -Llib -I. -Igl -Iplugins -Ilib -o contrib/check_uptime contrib/check_uptime.c \
-    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o   
+gcc $CFLAGS $CPPFLAGS -o contrib/check_timeout contrib/check_timeout.c \
+    $LIBS
+
+gcc $CFLAGS $CPPFLAGS -o contrib/check_uptime contrib/check_uptime.c \
+    plugins/popen.o plugins/utils.o lib/utils_base.o plugins/netutils.o \
+    $LIBS
 
 %install
 rm -rf %{buildroot}
