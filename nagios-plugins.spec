@@ -11,7 +11,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.4.15
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	GPLv2+
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -1433,9 +1433,9 @@ ln -sf ../../../%_lib/nagios/plugins/utils.sh .
 popd
 
 # delete unusable plugins
-rm -f %{buildroot}%{_libdir}/nagios/plugins/check_apt
-rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtg
-rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtgtraf
+#rm -f %{buildroot}%{_libdir}/nagios/plugins/check_apt
+#rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtg
+#rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtgtraf
 
 
 %pre
@@ -2522,6 +2522,9 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_snmp.cfg
 %{_libdir}/nagios/plugins/check_snmp
+%{_libdir}/nagios/plugins/check_apt
+%{_libdir}/nagios/plugins/check_mrtg
+%{_libdir}/nagios/plugins/check_mrtgtraf
 
 %files -n nagios-check_ssh
 %defattr(-,root,root)
