@@ -1431,867 +1431,21 @@ ln -sf ../../../%_lib/nagios/plugins/utils.sh .
 popd
 
 # delete unusable plugins
-#rm -f %{buildroot}%{_libdir}/nagios/plugins/check_apt
-#rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtg
-#rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtgtraf
-
+rm -f %{buildroot}%{_libdir}/nagios/plugins/check_apt
+rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtg
+rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtgtraf
 
 %pre
 %{_sbindir}/useradd -r -M -s /bin/sh -d /var/log/nagios -c "system user for %{nsusr}" %{nsusr} >/dev/null 2>&1 || :
 %{_bindir}/gpasswd -a %{cmdusr} %{nsgrp} >/dev/null 2>&1 || :
 
-if [ -f %{_sysconfdir}/nagios/plugins.d/%{name}.cfg ]; then
-    mv %{_sysconfdir}/nagios/plugins.d/%{name}.cfg %{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
-fi
-
 %postun
 %_postun_userdel %{nsusr}
 
-%if %mdkversion < 200900
-
-%post -n nagios-check_breeze
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_breeze
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_by_ssh
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_by_ssh
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_cluster
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_cluster
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_dhcp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_dhcp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_dig
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_dig
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_disk
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_disk
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_disk_smb
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_disk_smb
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_dns
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_dns
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_dummy
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_dummy
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_file_age
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_file_age
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_flexlm
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_flexlm
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_fping
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_fping
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_game
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_game
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_hpjd
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_hpjd
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_http
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_http
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_icmp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_icmp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ide_smart
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ide_smart
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ifoperstatus
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ifoperstatus
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ifstatus
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ifstatus
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ircd
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ircd
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ldap
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ldap
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_load
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_load
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_log
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_log
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mailq
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mailq
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mysql
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mysql
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mysql_query
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mysql_query
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_nagios
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_nagios
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_nt
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_nt
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ntp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ntp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ntp_peer
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ntp_peer
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ntp_time
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ntp_time
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_nwstat
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_nwstat
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_oracle
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_oracle
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_overcr
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_overcr
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_pgsql
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_pgsql
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ping
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ping
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_procs
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_procs
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_radius
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_radius
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_real
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_real
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_rpc
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_rpc
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_sensors
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_sensors
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_smtp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_smtp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_snmp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_snmp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ssh
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ssh
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_swap
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_swap
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_tcp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_tcp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_time
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_time
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ups
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ups
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_users
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_users
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_wave
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_wave
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_adptraid
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_adptraid
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_apache
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_apache
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_apc_ups
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_apc_ups
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_appletalk
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_appletalk
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_arping
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_arping
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_asterisk
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_asterisk
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_axis
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_axis
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_backup
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_backup
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_bgp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_bgp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_bgpstate
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_bgpstate
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ciscotemp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ciscotemp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_cluster2
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_cluster2
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_compaq_insight
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_compaq_insight
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_digitemp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_digitemp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_dlswcircuit
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_dlswcircuit
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_dns_random
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_dns_random
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_email_loop
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_email_loop
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_frontpage
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_frontpage
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_hprsc
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_hprsc
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_hw
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_hw
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ica_master_browser
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ica_master_browser
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ica_metaframe_pub_apps
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ica_metaframe_pub_apps
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ica_program_neigbourhood
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ica_program_neigbourhood
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_inodes
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_inodes
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ipxping
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ipxping
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_javaproc
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_javaproc
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_linux_raid
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_linux_raid
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_log2
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_log2
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_lotus
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_lotus
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_maxchannels
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_maxchannels
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_maxwanstate
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_maxwanstate
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mem
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mem
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mrtgext
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mrtgext
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_ms_spooler
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_ms_spooler
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_mssql
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_mssql
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_netapp
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_netapp
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_nmap
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_nmap
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_pcpmetric
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_pcpmetric
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_pfstate
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_pfstate
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_qmailq
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_qmailq
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_rbl
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_rbl
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_remote_nagios_status
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_remote_nagios_status
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_sendim
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_sendim
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_smart
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_smart
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_smb
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_smb
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_snmp_disk_monitor
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_snmp_disk_monitor
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_snmp_printer
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_snmp_printer
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_snmp_process_monitor
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_snmp_process_monitor
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_snmp_procs
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_snmp_procs
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_sockets
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_sockets
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_timeout
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_timeout
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_traceroute
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_traceroute
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_uptime
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_uptime
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%post -n nagios-check_wins
-%{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-
-%postun -n nagios-check_wins
-if [ "$1" = "0" ]; then
-    %{_initrddir}/nagios condrestart > /dev/null 2>&1 || :
-fi
-
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc AUTHORS CODING ChangeLog FAQ LEGAL NEWS README* REQUIREMENTS SUPPORT README.urpmi
 %config(noreplace) %{_sysconfdir}/nagios/command-old-style.cfg
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/%{name}.cfg_do_not_use
-%defattr(0755,root,root)
 %dir %{_libdir}/nagios
 %dir %{_libdir}/nagios/plugins
 %dir %{_libdir}/nagios/plugins/contrib
@@ -2306,236 +1460,187 @@ rm -rf %{buildroot}
 %{_datadir}/nagios/plugins
 
 %files -n nagios-check_breeze
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_breeze.cfg
 %{_libdir}/nagios/plugins/check_breeze
 
 %files -n nagios-check_by_ssh
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_by_ssh.cfg
 %{_libdir}/nagios/plugins/check_by_ssh
 
 %files -n nagios-check_cluster
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_cluster.cfg
 %{_libdir}/nagios/plugins/check_cluster
 
 %files -n nagios-check_dhcp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_dhcp.cfg
 %attr(4550,root,nagios) %{_libdir}/nagios/plugins/check_dhcp
 
 %files -n nagios-check_dig
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_dig.cfg
 %{_libdir}/nagios/plugins/check_dig
 
 %files -n nagios-check_disk
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_disk.cfg
 %{_libdir}/nagios/plugins/check_disk
 
 %files -n nagios-check_disk_smb
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_disk_smb.cfg
 %{_libdir}/nagios/plugins/check_disk_smb
 
 %files -n nagios-check_dns
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_dns.cfg
 %{_libdir}/nagios/plugins/check_dns
 
 %files -n nagios-check_dummy
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_dummy.cfg
 %{_libdir}/nagios/plugins/check_dummy
 
 %files -n nagios-check_file_age
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_file_age.cfg
 %{_libdir}/nagios/plugins/check_file_age
 
 %files -n nagios-check_flexlm
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_flexlm.cfg
 %{_libdir}/nagios/plugins/check_flexlm
 
 %files -n nagios-check_fping
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_fping.cfg
 %{_libdir}/nagios/plugins/check_fping
 
 %files -n nagios-check_game
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_game.cfg
 %{_libdir}/nagios/plugins/check_game
 
 %files -n nagios-check_hpjd
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_hpjd.cfg
 %{_libdir}/nagios/plugins/check_hpjd
 
 %files -n nagios-check_http
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_http.cfg
 %{_libdir}/nagios/plugins/check_http
 
 %files -n nagios-check_icmp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_icmp.cfg
 %attr(4550,root,nagios) %{_libdir}/nagios/plugins/check_icmp
 
 %files -n nagios-check_ide_smart
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ide_smart.cfg
 %{_libdir}/nagios/plugins/check_ide_smart
 
 %files -n nagios-check_ifoperstatus
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ifoperstatus.cfg
 %{_libdir}/nagios/plugins/check_ifoperstatus
 
 %files -n nagios-check_ifstatus
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ifstatus.cfg
 %{_libdir}/nagios/plugins/check_ifstatus
 
 %files -n nagios-check_ircd
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ircd.cfg
 %{_libdir}/nagios/plugins/check_ircd
 
 %files -n nagios-check_ldap
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ldap.cfg
 %{_libdir}/nagios/plugins/check_ldap
 %{_libdir}/nagios/plugins/check_ldaps
 
 %files -n nagios-check_load
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_load.cfg
 %{_libdir}/nagios/plugins/check_load
 
 %files -n nagios-check_log
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_log.cfg
 %{_libdir}/nagios/plugins/check_log
 
 %files -n nagios-check_mailq
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mailq.cfg
 %{_libdir}/nagios/plugins/check_mailq
 
 %files -n nagios-check_mysql
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mysql.cfg
 %{_libdir}/nagios/plugins/check_mysql
 
 %files -n nagios-check_mysql_query
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mysql_query.cfg
 %{_libdir}/nagios/plugins/check_mysql_query
 
 %files -n nagios-check_nagios
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_nagios.cfg
 %{_libdir}/nagios/plugins/check_nagios
 
 %files -n nagios-check_nt
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_nt.cfg
 %{_libdir}/nagios/plugins/check_nt
 
 %files -n nagios-check_ntp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ntp.cfg
 %{_libdir}/nagios/plugins/check_ntp
 
 %files -n nagios-check_ntp_peer
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ntp_peer.cfg
 %{_libdir}/nagios/plugins/check_ntp_peer
 
 %files -n nagios-check_ntp_time
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ntp_time.cfg
 %{_libdir}/nagios/plugins/check_ntp_time
 
 %files -n nagios-check_nwstat
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_nwstat.cfg
 %{_libdir}/nagios/plugins/check_nwstat
 
 %files -n nagios-check_oracle
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_oracle.cfg
 %{_libdir}/nagios/plugins/check_oracle
 
 %files -n nagios-check_overcr
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_overcr.cfg
 %{_libdir}/nagios/plugins/check_overcr
 
 %files -n nagios-check_pgsql
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_pgsql.cfg
 %{_libdir}/nagios/plugins/check_pgsql
 
 %files -n nagios-check_ping
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ping.cfg
 %{_libdir}/nagios/plugins/check_ping
 
 %files -n nagios-check_procs
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_procs.cfg
 %{_libdir}/nagios/plugins/check_procs
 
 %files -n nagios-check_radius
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_radius.cfg
 %{_libdir}/nagios/plugins/check_radius
 
 %files -n nagios-check_real
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_real.cfg
 %{_libdir}/nagios/plugins/check_real
 
 %files -n nagios-check_rpc
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_rpc.cfg
 %{_libdir}/nagios/plugins/check_rpc
 
 %files -n nagios-check_sensors
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_sensors.cfg
 %{_libdir}/nagios/plugins/check_sensors
 
 %files -n nagios-check_smtp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_smtp.cfg
 %{_libdir}/nagios/plugins/check_smtp
 
 %files -n nagios-check_snmp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_snmp.cfg
 %{_libdir}/nagios/plugins/check_snmp
-%{_libdir}/nagios/plugins/check_apt
-%{_libdir}/nagios/plugins/check_mrtg
-%{_libdir}/nagios/plugins/check_mrtgtraf
 
 %files -n nagios-check_ssh
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ssh.cfg
 %{_libdir}/nagios/plugins/check_ssh
 
 %files -n nagios-check_swap
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_swap.cfg
 %{_libdir}/nagios/plugins/check_swap
 
 %files -n nagios-check_tcp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_tcp.cfg
 %{_libdir}/nagios/plugins/check_tcp
 %{_libdir}/nagios/plugins/check_imap
@@ -2551,292 +1656,234 @@ rm -rf %{buildroot}
 %{_libdir}/nagios/plugins/check_nntps
 
 %files -n nagios-check_time
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_time.cfg
 %{_libdir}/nagios/plugins/check_time
 
 %files -n nagios-check_ups
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ups.cfg
 %{_libdir}/nagios/plugins/check_ups
 
 %files -n nagios-check_users
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_users.cfg
 %{_libdir}/nagios/plugins/check_users
 
 %files -n nagios-check_wave
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_wave.cfg
 %{_libdir}/nagios/plugins/check_wave
 
 %files -n nagios-check_adptraid
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_adptraid.cfg
 %{_libdir}/nagios/plugins/contrib/check_adptraid.sh
 
 %files -n nagios-check_apache
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_apache.cfg
 %{_libdir}/nagios/plugins/contrib/check_apache.pl
 
 %files -n nagios-check_apc_ups
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_apc_ups.cfg
 %{_libdir}/nagios/plugins/contrib/check_apc_ups.pl
 
 %files -n nagios-check_appletalk
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_appletalk.cfg
 %{_libdir}/nagios/plugins/contrib/check_appletalk.pl
 
 %files -n nagios-check_arping
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_arping.cfg
 %attr(4550,root,nagios) %{_libdir}/nagios/plugins/contrib/check_arping.pl
 
 %files -n nagios-check_asterisk
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_asterisk.cfg
 %{_libdir}/nagios/plugins/contrib/check_asterisk.pl
 
 %files -n nagios-check_axis
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_axis.cfg
 %{_libdir}/nagios/plugins/contrib/check_axis.sh
 
 %files -n nagios-check_backup
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_backup.cfg
 %{_libdir}/nagios/plugins/contrib/check_backup.pl
 
 %files -n nagios-check_bgp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_bgp.cfg
 %{_libdir}/nagios/plugins/contrib/check_bgp
 
 %files -n nagios-check_bgpstate
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_bgpstate.cfg
 %{_libdir}/nagios/plugins/contrib/check_bgpstate.pl
 
 %files -n nagios-check_ciscotemp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ciscotemp.cfg
 %{_libdir}/nagios/plugins/contrib/check_ciscotemp.pl
 
 %files -n nagios-check_cluster2
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_cluster2.cfg
 %{_libdir}/nagios/plugins/contrib/check_cluster2
 
 %files -n nagios-check_compaq_insight
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_compaq_insight.cfg
 %{_libdir}/nagios/plugins/contrib/check_compaq_insight.pl
 
 %files -n nagios-check_digitemp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_digitemp.cfg
 %{_libdir}/nagios/plugins/contrib/check_digitemp.pl
 
 %files -n nagios-check_dlswcircuit
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_dlswcircuit.cfg
 %{_libdir}/nagios/plugins/contrib/check_dlswcircuit.pl
 
 %files -n nagios-check_dns_random
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/domains.list
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_dns_random.cfg
 %{_libdir}/nagios/plugins/contrib/check_dns_random.pl
 
 %files -n nagios-check_email_loop
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_email_loop.cfg
 %{_libdir}/nagios/plugins/contrib/check_email_loop.pl
 
 %files -n nagios-check_frontpage
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_frontpage.cfg
 %{_libdir}/nagios/plugins/contrib/check_frontpage
 
 %files -n nagios-check_hprsc
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_hprsc.cfg
 %{_libdir}/nagios/plugins/contrib/check_hprsc.pl
 
 %files -n nagios-check_hw
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_hw.cfg
 %{_libdir}/nagios/plugins/contrib/check_hw.sh
 
 %files -n nagios-check_ica_master_browser
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ica_master_browser.cfg
 %{_libdir}/nagios/plugins/contrib/check_ica_master_browser.pl
 
 %files -n nagios-check_ica_metaframe_pub_apps
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ica_metaframe_pub_apps.cfg
 %{_libdir}/nagios/plugins/contrib/check_ica_metaframe_pub_apps.pl
 
 %files -n nagios-check_ica_program_neigbourhood
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ica_program_neigbourhood.cfg
 %{_libdir}/nagios/plugins/contrib/check_ica_program_neigbourhood.pl
 
 %files -n nagios-check_inodes
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_inodes.cfg
 %{_libdir}/nagios/plugins/contrib/check_inodes.pl
 
 %files -n nagios-check_ipxping
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ipxping.cfg
 %{_libdir}/nagios/plugins/contrib/check_ipxping
 
 %files -n nagios-check_javaproc
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_javaproc.cfg
 %{_libdir}/nagios/plugins/contrib/check_javaproc.pl
 
 %files -n nagios-check_linux_raid
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_linux_raid.cfg
 %{_libdir}/nagios/plugins/contrib/check_linux_raid.pl
 
 %files -n nagios-check_log2
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_log2.cfg
 %{_libdir}/nagios/plugins/contrib/check_log2.pl
 
 %files -n nagios-check_lotus
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_lotus.cfg
 %{_libdir}/nagios/plugins/contrib/check_lotus.pl
 
 %files -n nagios-check_maxchannels
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_maxchannels.cfg
 %{_libdir}/nagios/plugins/contrib/check_maxchannels.pl
 
 %files -n nagios-check_maxwanstate
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_maxwanstate.cfg
 %{_libdir}/nagios/plugins/contrib/check_maxwanstate.pl
 
 %files -n nagios-check_mem
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mem.cfg
 %{_libdir}/nagios/plugins/contrib/check_mem.pl
 
 %files -n nagios-check_mrtgext
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mrtgext.cfg
 %{_libdir}/nagios/plugins/contrib/check_mrtgext.pl
 
 %files -n nagios-check_ms_spooler
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_ms_spooler.cfg
 %{_libdir}/nagios/plugins/contrib/check_ms_spooler.pl
 
 %files -n nagios-check_mssql
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_mssql.cfg
 %{_libdir}/nagios/plugins/contrib/check_mssql.sh
 
 %files -n nagios-check_netapp
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_netapp.cfg
 %{_libdir}/nagios/plugins/contrib/check_netapp.pl
 
 %files -n nagios-check_nmap
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_nmap.cfg
 %{_libdir}/nagios/plugins/contrib/check_nmap.py
 
 %files -n nagios-check_pcpmetric
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_pcpmetric.cfg
 %{_libdir}/nagios/plugins/contrib/check_pcpmetric.py
 
 %files -n nagios-check_pfstate
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_pfstate.cfg
 %{_libdir}/nagios/plugins/contrib/check_pfstate
 
 %files -n nagios-check_qmailq
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_qmailq.cfg
 %{_libdir}/nagios/plugins/contrib/check_qmailq.pl
 
 %files -n nagios-check_rbl
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_rbl.cfg
 %{_libdir}/nagios/plugins/contrib/check_rbl
 
 %files -n nagios-check_remote_nagios_status
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_remote_nagios_status.cfg
 %{_libdir}/nagios/plugins/contrib/check_remote_nagios_status.pl
 
 %files -n nagios-check_sendim
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_sendim.cfg
 %{_libdir}/nagios/plugins/contrib/check_sendim.pl
 
 %files -n nagios-check_smart
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_smart.cfg
 %{_libdir}/nagios/plugins/contrib/check_smart.pl
 
 %files -n nagios-check_smb
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_smb.cfg
 %{_libdir}/nagios/plugins/contrib/check_smb.sh
 
 %files -n nagios-check_snmp_disk_monitor
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_snmp_disk_monitor.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_disk_monitor.pl
 
 %files -n nagios-check_snmp_printer
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_snmp_printer.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_printer.pl
 
 %files -n nagios-check_snmp_process_monitor
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_snmp_process_monitor.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_process_monitor.pl
 
 %files -n nagios-check_snmp_procs
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_snmp_procs.cfg
 %{_libdir}/nagios/plugins/contrib/check_snmp_procs.pl
 
 %files -n nagios-check_sockets
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_sockets.cfg
 %{_libdir}/nagios/plugins/contrib/check_sockets.pl
 
 %files -n nagios-check_timeout
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_timeout.cfg
 %{_libdir}/nagios/plugins/contrib/check_timeout
 
 %files -n nagios-check_traceroute
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_traceroute.cfg
 %{_libdir}/nagios/plugins/contrib/check_traceroute.pl
 
 %files -n nagios-check_uptime
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_uptime.cfg
 %{_libdir}/nagios/plugins/contrib/check_uptime
 
 %files -n nagios-check_wins
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_wins.cfg
 %{_libdir}/nagios/plugins/contrib/check_wins.pl
