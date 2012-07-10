@@ -10,8 +10,8 @@
 
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
-Version:	1.4.15
-Release:	%mkrel 7
+Version:	1.4.16
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Networking/Other
 URL:		http://nagiosplug.sourceforge.net/
@@ -145,8 +145,7 @@ Patch19:	nagios-plugins-utils.pm_fix.diff
 # http://sourceforge.net/tracker/index.php?func=detail&aid=1854415&group_id=29880&atid=397599
 Patch21:	nagios-plugins-1.4.15-check_dhcp-roguedhcpservercheck.patch
 # http://sourceforge.net/tracker/?func=detail&atid=397599&aid=2430999&group_id=29880
-Patch22:	nagios-plugins-1.4.15-check_ldap_certificate.patch
-Patch23:	nagios-plugins-1.4.15-fix-format-errors.patch
+Patch22:	nagios-plugins-1.4.16-check_ldap_certificate.patch
 #
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -1161,7 +1160,6 @@ Perl Check WINS plugin for Nagios.
 %patch19 -p1
 %patch21 -p1
 %patch22 -p1
-%patch23 -p1
 
 # fix strange perms
 find . -type d -perm 0700 -exec chmod 755 {} \;
