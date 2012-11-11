@@ -1,0 +1,10 @@
+--- contrib/check_ms_spooler.pl	2002-07-16 02:04:42.000000000 +0200
++++ contrib/check_ms_spooler.pl.oden	2008-01-11 17:28:25.000000000 +0100
+@@ -38,6 +38,7 @@
+ use strict ;
+ 
+ use Getopt::Long ;
++use lib "/usr/libexec/nagios/plugins";
+ use utils ;
+ 
+ use vars qw($opt_H $opt_s $opt_W $opt_u $opt_p $opt_w $opt_c $debug);

@@ -1,0 +1,101 @@
+--- contrib/check_ipxping.c	2002-03-01 03:42:56.000000000 +0100
++++ contrib/check_ipxping.c.oden	2007-04-11 17:22:17.000000000 +0200
+@@ -6,13 +6,13 @@
+  * License: GPL
+  * Copyright (c) 1999 Ethan Galstad (nagios@nagios.org)
+  *
+- * Last Modified: 09-24-1999
++ * Last Modified: 04-11-2007
+  *
+  * Command line: CHECK_IPXPING <dest_network> <dest_address> <wrtt> <crtt>
+  *
+  * Description:
+  *
+- * This plugin will use the /usr/bin/ipxping command to ping the specified host using the
++ * This plugin will use the ipxping command to ping the specified host using the
+  * IPX protocol.  Note: Linux users must have IPX support compiled into the kernerl and
+  * must have IPX configured correctly in order for this plugin to work.
+  * If the round trip time value is above the <wrtt> level, a STATE_WARNING is
+@@ -32,14 +32,16 @@
+ #include "netutils.h"
+ #include "popen.h"
+ 
++const char *progname = "check_ipxping";
++void print_usage(void);
++
+ /* this should be moved out to the configure script! */
+-#define IPXPING_COMMAND	"/tmp/ipxping/ipxping"
++#define IPXPING_COMMAND	"/usr/bin/ipxping"
+ 
+ /* these should be moved to the common header file */
+ #define MAX_IPXNET_ADDRESS_LENGTH	12
+ #define MAX_IPXHOST_ADDRESS_LENGTH	18
+ 
+-int socket_timeout=DEFAULT_SOCKET_TIMEOUT;
+ char dest_network[MAX_IPXNET_ADDRESS_LENGTH];
+ char dest_address[MAX_IPXHOST_ADDRESS_LENGTH];
+ int wrtt;
+@@ -62,31 +64,10 @@
+ 
+ 	if(process_arguments(argc,argv)!=OK){
+ 		printf("Incorrect arguments supplied\n");
+-		printf("\n");
+-		printf("IPX ping plugin for Nagios\n");
+-		printf("Copyright (c) 1999 Ethan Galstad (nagios@nagios.org)\n");
+-		printf("Last Modified: 09-24-1999\n");
+-		printf("License: GPL\n");
+-		printf("\n");
+-		printf("Usage: %s <dest_network> <dest_address> <wrtt> <crtt> [-to to_sec]\n",argv[0]);
+-		printf("\n");
+-		printf("Options:\n");
+-		printf(" <dest_network> = IPX network that the remote host lies on.  (Hex Format - 00:00:00:00)\n");
+-		printf(" <dest_address> = MAC address of the remote host.  (Hex Format - 00:00:00:00:00:00)\n");
+-		printf(" <wrtt>         = Round trip time in milliseconds necessary to result in a WARNING state\n");
+-		printf(" <crtt>         = Round trip time in milliseconds necessary to result in a CRITICAL state\n");
+-		printf(" [to_sec]	= Seconds before we should timeout waiting for ping result.  Default = %d sec\n",DEFAULT_SOCKET_TIMEOUT);
+-		printf("\n");
+-		printf("Notes:\n");
+-		printf("This plugin will use the /usr/bin/ipxping command to ping the specified host using\n");
+-		printf("the IPX protocol.  IPX support must be compiled into the kernel and your host must\n");
+-		printf("be correctly configured to use IPX before this plugin will work! An RPM package of\n");
+-		printf("the ipxping binary can be found at...\n");
+-		printf("http://www.rpmfind.net/linux/RPM/contrib/libc5/i386/ipxping-0.0-2.i386.shtml\n");
+-		printf("\n");
++		print_usage();
+ 		return STATE_UNKNOWN;
+ 	        }
+-  
++
+ 	/* create the command line to use... */
+ 	sprintf(command_line,"%s %s %s",IPXPING_COMMAND,dest_network,dest_address);
+ 
+@@ -196,6 +177,26 @@
+ 	return OK;
+         }
+ 
+-
+-
+-
++void print_usage(void)
++{
++    printf("\n");
++    printf("IPX ping plugin for Nagios\n");
++    printf("Copyright (c) 1999 Ethan Galstad (nagios@nagios.org)\n");
++    printf("Last Modified: 04-11-2007\n");
++    printf("License: GPL\n");
++    printf("\n");
++    printf("Usage: %s <dest_network> <dest_address> <wrtt> <crtt> [-to to_sec]\n");
++    printf("\n");
++    printf("Options:\n");
++    printf(" <dest_network> = IPX network that the remote host lies on.  (Hex Format - 00:00:00:00)\n");
++    printf(" <dest_address> = MAC address of the remote host.  (Hex Format - 00:00:00:00:00:00)\n");
++    printf(" <wrtt>         = Round trip time in milliseconds necessary to result in a WARNING state\n");
++    printf(" <crtt>         = Round trip time in milliseconds necessary to result in a CRITICAL state\n");
++    printf(" [to_sec]	= Seconds before we should timeout waiting for ping result.  Default = %d sec\n",DEFAULT_SOCKET_TIMEOUT);
++    printf("\n");
++    printf("Notes:\n");
++    printf("This plugin will use the ipxping command to ping the specified host using\n");
++    printf("the IPX protocol.  IPX support must be compiled into the kernel and your host must\n");
++    printf("be correctly configured to use IPX before this plugin will work!\n");
++    printf("\n");
++}

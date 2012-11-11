@@ -1,0 +1,11 @@
+--- contrib/check_nmap.py	2008-01-05 18:36:58.000000000 +0100
++++ contrib/check_nmap.py.oden	2008-01-05 18:40:33.000000000 +0100
+@@ -54,7 +54,7 @@
+ import utils
+ 
+ # Where temp files should be placed
+-tempfile.tempdir='/usr/local/nagios/var'
++tempfile.tempdir='/tmp'
+ 
+ # Base name for tempfile
+ tempfile.template='check_nmap_tmp.'

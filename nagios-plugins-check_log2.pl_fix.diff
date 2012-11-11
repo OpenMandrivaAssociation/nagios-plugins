@@ -1,0 +1,10 @@
+--- contrib/check_log2.pl	2008-01-04 21:04:42.000000000 +0100
++++ contrib/check_log2.pl.oden	2008-01-04 21:05:25.000000000 +0100
+@@ -61,6 +61,7 @@
+ require 5.004;
+ 
+ use lib $main::prog_dir;
++use lib "/usr/libexec/nagios/plugins";
+ use utils qw($TIMEOUT %ERRORS &print_revision &support &usage);
+ use Getopt::Long;
+ my  ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks);

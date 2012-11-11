@@ -1,0 +1,124 @@
+diff -Naur -x '*~' -x '*.orig' -x '*.rej' nagios-plugins-1.4.15/plugins-root/check_dhcp.c nagios-plugins-1.4.15-check_dhcp-roguedhcpservercheck//plugins-root/check_dhcp.c
+--- nagios-plugins-1.4.15/plugins-root/check_dhcp.c	2010-07-27 22:47:16.000000000 +0200
++++ nagios-plugins-1.4.15-check_dhcp-roguedhcpservercheck//plugins-root/check_dhcp.c	2010-08-06 00:33:04.000000000 +0200
+@@ -156,6 +156,7 @@
+ 	u_int32_t lease_time;            /* lease time in seconds */
+ 	u_int32_t renewal_time;          /* renewal time in seconds */
+ 	u_int32_t rebinding_time;        /* rebinding time in seconds */
++	u_int8_t desired;                /* is this offer desired (necessary in exclusive mode) */
+ 	struct dhcp_offer_struct *next;
+         }dhcp_offer;
+ 
+@@ -199,6 +200,7 @@
+ #define ETHERNET_HARDWARE_ADDRESS_LENGTH     6     /* length of Ethernet hardware addresses */
+ 
+ u_int8_t unicast = 0;        /* unicast mode: mimic a DHCP relay */
++u_int8_t exclusive = 0;        /* exclusive mode aka "rogue DHCP server detection" */
+ struct in_addr my_ip;        /* our address (required for relay) */
+ struct in_addr dhcp_ip;      /* server to query (if in unicast mode) */
+ unsigned char client_hardware_address[MAX_DHCP_CHADDR_LENGTH]="";
+@@ -912,6 +914,7 @@
+ 	new_offer->lease_time=dhcp_lease_time;
+ 	new_offer->renewal_time=dhcp_renewal_time;
+ 	new_offer->rebinding_time=dhcp_rebinding_time;
++	new_offer->desired=FALSE; /* exclusive mode: we'll check that in get_results */
+ 
+ 
+ 	if(verbose){
+@@ -957,7 +960,7 @@
+ 
+ /* gets state and plugin output to return */
+ int get_results(void){
+-	dhcp_offer *temp_offer;
++	dhcp_offer *temp_offer, *undesired_offer=NULL;
+ 	requested_server *temp_server;
+ 	int result;
+ 	u_int32_t max_lease_time=0;
+@@ -992,11 +995,18 @@
+ 					if(temp_server->answered == FALSE){
+ 						requested_responses++;
+ 						temp_server->answered=TRUE;
++						temp_offer->desired=TRUE;
+ 						}
+ 				        }
+ 		                }
+ 		        }
+ 
++		/* exclusive mode: check for undesired offers */
++		for(temp_offer=dhcp_offer_list;temp_offer!=NULL;temp_offer=temp_offer->next)
++			if (temp_offer->desired == FALSE) {
++				undesired_offer=temp_offer; /* Checks only for the first undesired offer */
++				break; /* no further checks needed */
++			}
+ 	        }
+ 
+ 	/* else check and see if we got our requested address from any server */
+@@ -1023,6 +1033,9 @@
+ 		result=STATE_WARNING;
+ 	else if(request_specific_address==TRUE && received_requested_address==FALSE)
+ 		result=STATE_WARNING;
++	
++	if(exclusive && undesired_offer)
++                result=STATE_CRITICAL;
+ 
+ 	if(result==0)               /* garrett honeycutt 2005 */
+ 		printf("OK: ");
+@@ -1039,6 +1052,12 @@
+ 		return result;
+ 	        }
+ 
++	if(exclusive && undesired_offer){
++                printf(_("Rogue DHCP Server detected! Server %s"),inet_ntoa(undesired_offer->server_address));
++                printf(_(" offered %s \n"),inet_ntoa(undesired_offer->offered_address));
++                return result;
++		}
++
+ 	printf(_("Received %d DHCPOFFER(s)"),valid_responses);
+ 
+ 	if(requested_servers>0)
+@@ -1093,6 +1112,7 @@
+ 		{"interface",      required_argument,0,'i'},
+ 		{"mac",            required_argument,0,'m'},
+ 		{"unicast",        no_argument,      0,'u'},
++		{"exclusive",      no_argument,      0,'x'},
+ 		{"verbose",        no_argument,      0,'v'},
+ 		{"version",        no_argument,      0,'V'},
+ 		{"help",           no_argument,      0,'h'},
+@@ -1100,7 +1120,7 @@
+ 	};
+ 
+ 	while(1){
+-		c=getopt_long(argc,argv,"+hVvt:s:r:t:i:m:u",long_options,&option_index);
++		c=getopt_long(argc,argv,"+hVvxt:s:r:t:i:m:u",long_options,&option_index);
+ 
+ 		i++;
+ 
+@@ -1163,6 +1183,10 @@
+ 			unicast=1;
+ 			break;
+ 
++                case 'x': /* exclusive testing aka "rogue DHCP server detection" */
++                        exclusive=1;
++                        break;
++		
+ 		case 'V': /* version */
+ 			print_revision(progname, NP_VERSION);
+ 			exit(STATE_OK);
+@@ -1409,6 +1433,8 @@
+   printf ("    %s\n", _("MAC address to use in the DHCP request"));
+   printf (" %s\n", "-u, --unicast");
+   printf ("    %s\n", _("Unicast testing: mimic a DHCP relay, requires -s"));
++  printf (" %s\n", "-x, --exclusive");
++  printf ("    %s\n", _("Only requested DHCP server may response (rogue DHCP server detection), requires -s"));
+ 
+   printf (UT_SUPPORT);
+ 	return;
+@@ -1419,7 +1445,7 @@
+ print_usage(void){
+ 
+   printf ("%s\n", _("Usage:"));
+-  printf (" %s [-v] [-u] [-s serverip] [-r requestedip] [-t timeout]\n",progname);
++  printf (" %s [-v] [-u] [-x] [-s serverip] [-r requestedip] [-t timeout]\n",progname);
+   printf ("                  [-i interface] [-m mac]\n");
+ 
+ 	return;

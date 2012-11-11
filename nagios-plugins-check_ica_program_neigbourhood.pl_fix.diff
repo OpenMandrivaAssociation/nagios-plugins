@@ -1,0 +1,10 @@
+--- contrib/check_ica_program_neigbourhood.pl	2008-01-04 18:33:26.000000000 +0100
++++ contrib/check_ica_program_neigbourhood.pl.oden	2008-01-04 20:35:24.000000000 +0100
+@@ -14,6 +14,7 @@
+ 
+ use Getopt::Long;
+ 
++use lib "/usr/libexec/nagios/plugins";
+ use utils qw($TIMEOUT %ERRORS &print_revision &support);
+ use LWP 5.65 ;
+ use XML::Parser ;

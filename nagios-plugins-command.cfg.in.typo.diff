@@ -1,0 +1,11 @@
+--- command.cfg.in	2008-01-04 14:09:24.000000000 +0100
++++ command.cfg.in.oden	2008-01-04 14:34:02.000000000 +0100
+@@ -165,7 +165,7 @@
+ # 
+ # the following 4 return the following codes: other=1, ok=2, degraded=3, failed=4
+ #
+-command[check_compaq_thermalCondition]=@libexec@/check_snmp -H $HOSTADDRESS$ -C public -o .1.3.6.1.4.1.232.6.2.1.0,.1.3.6.1.4.1.232.6.2.2.0,.1.3.6.1.4.1.232.6.2.3.0,.1.3.6.1.4.1.232.6.2.4.0 -u 'ThermalCondition','ThermalTemp','ThermalSystem','ThermalCPUFan' -w 2:2,2:2,2:2,2:2 -c 1:2,1:2,1:2,1:2 -l "Thermal status "
++command[check_compaq_thermalCondition]=@libexecdir@/check_snmp -H $HOSTADDRESS$ -C public -o .1.3.6.1.4.1.232.6.2.1.0,.1.3.6.1.4.1.232.6.2.2.0,.1.3.6.1.4.1.232.6.2.3.0,.1.3.6.1.4.1.232.6.2.4.0 -u 'ThermalCondition','ThermalTemp','ThermalSystem','ThermalCPUFan' -w 2:2,2:2,2:2,2:2 -c 1:2,1:2,1:2,1:2 -l "Thermal status "
+ #
+ #
+ 

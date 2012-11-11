@@ -1,0 +1,15 @@
+ we don't want message from ping triggering a warning:
+ WARNING: failed to install socket filter: Protocol not available
+
+--- plugins/check_ping.c.orig	2007-03-12 11:51:05.000000000 +0100
++++ plugins/check_ping.c	2007-04-11 18:29:09.000000000 +0200
+@@ -475,7 +475,8 @@
+ 	/* check stderr, setting at least WARNING if there is output here */
+ 	/* Add warning into warn_text */
+ 	while (fgets (buf, MAX_INPUT_BUFFER - 1, child_stderr)) {
+-		if (! strstr(buf,"WARNING - no SO_TIMESTAMP support, falling back to SIOCGSTAMP")) {
++		if (! strstr(buf,"WARNING - no SO_TIMESTAMP support, falling back to SIOCGSTAMP") &&
++            ! strstr(buf,"WARNING: failed to install socket filter: Protocol not available")) {
+ 			if (verbose >= 3) {
+ 				printf("Got stderr: %s", buf);
+ 			}
