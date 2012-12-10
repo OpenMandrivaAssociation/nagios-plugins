@@ -1887,3 +1887,245 @@ rm -f %{buildroot}%{_libdir}/nagios/plugins/check_mrtgtraf
 %files -n nagios-check_wins
 %config(noreplace) %{_sysconfdir}/nagios/plugins.d/check_wins.cfg
 %{_libdir}/nagios/plugins/contrib/check_wins.pl
+
+
+%changelog
+* Tue Jul 10 2012 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.16-1mdv2012.0
++ Revision: 808717
+- sync with mageia
+- 1.4.16
+
+* Mon Jul 18 2011 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.15-7
++ Revision: 690295
+- rebuilt against new net-snmp libs
+
+* Wed Apr 06 2011 Luis Daniel Lucio Quiroz <dlucio@mandriva.org> 1:1.4.15-6
++ Revision: 651225
+- Lets try some mrtg plugins
+
+* Thu Mar 17 2011 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.15-5
++ Revision: 645847
+- relink against libmysqlclient.so.18
+
+* Sat Jan 01 2011 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.15-4mdv2011.0
++ Revision: 627265
+- rebuilt against mysql-5.5.8 libs, again
+
+* Thu Dec 30 2010 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.15-3mdv2011.0
++ Revision: 626546
+- rebuilt against mysql-5.5.8 libs
+
+* Fri Aug 06 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.15-1mdv2011.0
++ Revision: 566777
+- new version
+- rediff check_dhcp and check_ldap patches
+- fix contrib plugins build
+
+* Thu May 06 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.14-8mdv2010.1
++ Revision: 543063
+- rebuild for missing x86_64 check_nmap package
+
+* Mon Apr 19 2010 Funda Wang <fwang@mandriva.org> 1:1.4.14-7mdv2010.1
++ Revision: 536582
+- rebuild
+
+* Mon Mar 29 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.14-6mdv2010.1
++ Revision: 528810
+- drop check_by_ssh references in check_disk plugin configuration (fix #58316)
+
+* Wed Mar 03 2010 Michael Scherer <misc@mandriva.org> 1:1.4.14-5mdv2010.1
++ Revision: 513746
+- fix License
+- add check_ping6 to explicitly check ipv6 connectivity
+
+* Sun Feb 28 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.14-4mdv2010.1
++ Revision: 512688
+- drop mrtg plugins, as mrtg has been dropped
+
+* Thu Feb 18 2010 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.14-3mdv2010.1
++ Revision: 507492
+- rebuild
+
+* Mon Sep 21 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.14-2mdv2010.0
++ Revision: 446947
+- make all script plugins requires base package
+
+* Mon Sep 21 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.14-1mdv2010.0
++ Revision: 446157
+- new version
+- drop locales patch: too much general, let's fix actual issue instead
+- drop sni support patch (merged upstream)
+- rediff ldap certificate check and rogue DHCP server check patches
+- updated contrib API patch
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Wed Mar 25 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.13-12mdv2009.1
++ Revision: 361186
+- fix SNI support patch
+- no need for a specific verify policy
+
+* Tue Mar 24 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.13-11mdv2009.1
++ Revision: 360958
+- check_mysql_perf is dead
+
+* Mon Mar 09 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.13-10mdv2009.1
++ Revision: 353155
+- don't copy configuration files twice
+- cleanup file list from useless directives
+- don't duplicate spec-helper job
+- don't package check_apt, apt is currently not available on mandriva
+
+* Thu Mar 05 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.13-9mdv2009.1
++ Revision: 348827
+- add SNI support patch for check_http plugin
+- fix build by calling autoreconf, instead of manual calls to autotools suite
+
+* Sun Dec 21 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.13-8mdv2009.1
++ Revision: 317100
+- add ldap certificate checking patch
+
+* Mon Dec 15 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.13-7mdv2009.1
++ Revision: 314627
+- rediff some patches for no fuzz
+- no explicit %%post scriptlet, nagios has filetriggers now
+- symlinks utils.sh and utils.pm in %%_datadir, to make additional plugins
+  packages noarch
+
+* Fri Dec 12 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.13-6mdv2009.1
++ Revision: 313606
+- rediff some patches to meet the nofuzz criteria
+
+* Sat Dec 06 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.13-5mdv2009.1
++ Revision: 311311
+- rebuilt against mysql-5.1.30 libs
+
+* Fri Nov 21 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.13-4mdv2009.1
++ Revision: 305447
+- fix #45711 (checking by elapsed time does not work in check_procs nagios plugin)
+
+* Mon Nov 10 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.13-3mdv2009.1
++ Revision: 301805
+- fix deps
+
+* Sun Nov 09 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.13-2mdv2009.1
++ Revision: 301334
+- fix #45526 (Bad argument defined in the config file of check_nagios plugin)
+
+* Fri Oct 10 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.13-1mdv2009.0
++ Revision: 291381
+- 1.4.13
+
+  + Michael Scherer <misc@mandriva.org>
+    - remove check_smtp from check_tcp.cfg, as check_smtp is already defined in its own configuration file
+
+* Wed Jun 25 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.12-1mdv2009.0
++ Revision: 228993
+- 1.4.12
+- rediffed P0
+- drop P20, it's implemented upstream
+
+* Tue Mar 18 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-12mdv2008.1
++ Revision: 188544
+- bump release
+- added P21 to make check_dhcp check for rogue dhcp servers
+
+* Fri Feb 15 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-11mdv2008.1
++ Revision: 168863
+- prevent circular build deps
+
+* Thu Feb 14 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-10mdv2008.1
++ Revision: 168605
+- make it build on cs4
+
+* Thu Feb 14 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.11-9mdv2008.1
++ Revision: 167737
+- fix build with latest pgsql
+- setuid checks (icmp, arp and dhcp) needs nagios group execution permission
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - fix description-line-too-long
+    - fix spacing at top of description
+
+* Wed Jan 23 2008 Thierry Vignaud <tv@mandriva.org> 1:1.4.11-8mdv2008.1
++ Revision: 157258
+- rebuild with fixed %%serverbuild macro
+
+* Thu Jan 17 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-7mdv2008.1
++ Revision: 154430
+- check_mysql_perf-1.3
+- fix #36663 (Error message when installing any nagios plug-in)
+
+* Fri Jan 11 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-6mdv2008.1
++ Revision: 148676
+- rework it again, fixing a lot of stuff...
+- fix #35036 (unowned directory for nagios plugins)
+- adding the svn Id tag to the config files
+- fix #36666 (Missing arguments for check_arping)
+
+* Thu Jan 10 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-5mdv2008.1
++ Revision: 147603
+- added the check_mysql_perf plugin
+- fixed deps
+
+* Sat Jan 05 2008 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-4mdv2008.1
++ Revision: 145869
+- major rework, aka. "the mega split". note this is wip
+- added some configuration files
+- added some patches
+
+* Thu Dec 27 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4.11-3mdv2008.1
++ Revision: 138318
+- ship mrtg plugins in a distinct subpackage, to avoid costly dependencies (bug #35035)
+
+* Mon Dec 24 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-2mdv2008.1
++ Revision: 137514
+- rebuilt against openldap-2.4.7 libs
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Mon Dec 17 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.11-1mdv2008.1
++ Revision: 123063
+- 1.4.11
+- rediffed P0
+
+* Wed Oct 10 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.10-1mdv2008.1
++ Revision: 96787
+- 1.4.10
+- drop upstream implemented P4,P5
+- rediffed P0,P6
+
+* Sun Sep 09 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.9-5mdv2008.0
++ Revision: 83457
+- whoops!, it was the other way around :)
+
+* Sun Sep 09 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.9-4mdv2008.0
++ Revision: 83455
+- fix the %%pre scriptlet
+
+* Thu Aug 23 2007 Thierry Vignaud <tv@mandriva.org> 1:1.4.9-3mdv2008.0
++ Revision: 70377
+- fileutils, sh-utils & textutils have been obsoleted by coreutils a long time ago
+
+* Tue Jul 24 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.9-2mdv2008.0
++ Revision: 55020
+- use the new %%serverbuild macro
+
+* Thu Jun 14 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.9-1mdv2008.0
++ Revision: 39297
+- use distro conditional -fstack-protector
+- don't hardcode automake-1.9
+- add teh source too
+- 1.4.9
+- rediffed P0
+
+* Wed Apr 18 2007 Oden Eriksson <oeriksson@mandriva.com> 1:1.4.8-1mdv2008.0
++ Revision: 14466
+- fix build
+- 1.4.8
+
