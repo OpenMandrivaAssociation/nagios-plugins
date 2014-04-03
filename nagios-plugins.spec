@@ -75,7 +75,7 @@ BuildRequires:	mysql-devel
 BuildRequires:	bind-utils
 BuildRequires:	fping
 BuildRequires:	gettext-devel
-BuildRequires:	libsasl-devel
+BuildRequires:	sasl-devel
 BuildRequires:	net-snmp-utils
 BuildRequires:	ntp
 BuildRequires:	nut
