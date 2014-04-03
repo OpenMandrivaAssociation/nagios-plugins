@@ -1,2 +1,4 @@
+removed_sources:
+  nagios-plugins-1.4.16.tar.gz: 52db48b15572b98c6fcd8aaec2ef4d2aad7640d3
 sources:
-  "nagios-plugins-1.4.16.tar.gz": 52db48b15572b98c6fcd8aaec2ef4d2aad7640d3
+  nagios-plugins-1.5.tar.gz: 5d426b0e303a5201073c342d8ddde8bafca1432b

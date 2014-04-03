@@ -1,0 +1,20 @@
+diff -Naur -x '*~' nagios-plugins-1.5/configure.in nagios-plugins-1.5-automake-1.14/configure.in
+--- nagios-plugins-1.5/configure.in	2013-10-02 17:22:21.000000000 +0200
++++ nagios-plugins-1.5-automake-1.14/configure.in	2014-02-06 16:43:07.883505655 +0100
+@@ -6,7 +6,7 @@
+ 	nagios-plugins.spec])
+ AC_CONFIG_AUX_DIR(build-aux)
+ AM_INIT_AUTOMAKE([1.8.3])
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS(config.h)
+ AC_CANONICAL_HOST
+ 
+ RELEASE=1
+@@ -44,6 +44,7 @@
+ gl_EARLY
+ AC_PROG_GCC_TRADITIONAL
+ AC_PROG_LIBTOOL
++AC_PROG_MKDIR_P
+ 
+ AM_PROG_CC_C_O
+ 
