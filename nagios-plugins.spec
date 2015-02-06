@@ -6,7 +6,7 @@
 Summary:	Host/service/network monitoring program plugins for Nagios
 Name:		nagios-plugins
 Version:	1.5
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Monitoring
 URL:		http://nagiosplug.sourceforge.net/
