@@ -9,7 +9,7 @@ Version:	1.5
 Release:	2
 License:	GPLv2+
 Group:		Monitoring
-URL:		http://nagiosplug.sourceforge.net/
+URL:		https://nagiosplug.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/nagiosplug/%{name}-%{version}.tar.gz
 Source101:	check_breeze.cfg
 Source102:	check_by_ssh.cfg
