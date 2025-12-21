@@ -70,6 +70,11 @@ Patch22:	nagios-plugins-1.5-check_ldap_certificate.patch
 Patch23:	nagios-plugins-1.5-automake-1.14.patch
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	cvs
 BuildRequires:	mysql-devel
 BuildRequires:	bind-utils
